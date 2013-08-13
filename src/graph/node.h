@@ -7,8 +7,14 @@ namespace graph {
 
 class Node
 {
+    friend class Edge;
+
 public:
     Node(Graph *graph);
+
+private:
+    Graph *graph;
+    Agnode_t *n;
 };
 
 }

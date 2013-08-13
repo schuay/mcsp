@@ -13,6 +13,13 @@ public:
     Edge(Node *tail, 
          Node *head,
          const std::vector<int> &weights);
+
+private:
+    Graph *graph;
+    Node *tail, *head;
+    Agedge_t *e;
+
+    std::vector<int> weights;
 };
 
 }
