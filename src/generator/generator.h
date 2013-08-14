@@ -17,9 +17,8 @@ class Generator {
 
    public:
       /* generate a random connected directed graph
-         n vertices, m edges, connected, parallel edges, d dimensional weight vector
       */
-      Graph generate_rDiGraph(const std::string& name,         
+      Graph *generate_rDiGraph(const std::string& name,         
                            const size_t& n,                    /* Number of nodes (n > 0) */
                            const size_t& m,                    /* Number of edges (n-1 < m < n*(n-1)) */
                            const bool& allow_parallel_edges,   /* If true, graph may contain parallel edges */

@@ -7,7 +7,7 @@
 #include <cstdlib>
 #include <vector>
 
-Graph
+Graph *
 Generator::
 generate_rDAG(const std::string& name,
               const size_t &n,
@@ -19,13 +19,13 @@ generate_rDAG(const std::string& name,
    assert(m > n-1);
    assert(m < n*(n-1));
    
-   Graph g(name);
+   Graph *g = new Graph(name);
    
    std::vector<Node*> tree;
    
    /*  Generate a random permutation in the array tree. */
    for (size_t i = 0; i < n; i++) {
-      tree.push_back(g.add_node());
+      tree.push_back(g->add_node());
    }
    std::random_shuffle (tree.begin(), tree.end());
 
@@ -42,7 +42,7 @@ generate_rDAG(const std::string& name,
     
    for (head = 1; head < n; head++) {
       tail = rand() % head;
-      g.add_edge(tree[tail], tree[head], generate_weight_vector(weight_limits));
+      g->add_edge(tree[tail], tree[head], generate_weight_vector(weight_limits));
    }
 
    /* Add additional random edges until achieving desired number */
@@ -50,9 +50,9 @@ generate_rDAG(const std::string& name,
       tail = rand() % n;
       do {
          head = rand() % n;
-      } while(head == tail || (!allow_parallel_edges && g.contains_edge(tree[tail], tree[head])));
+      } while(head == tail || (!allow_parallel_edges && g->contains_edge(tree[tail], tree[head])));
                
-      g.add_edge(tree[tail], tree[head], generate_weight_vector(weight_limits));
+      g->add_edge(tree[tail], tree[head], generate_weight_vector(weight_limits));
    }
    return g;
 }
