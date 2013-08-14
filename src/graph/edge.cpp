@@ -17,4 +17,15 @@ Edge(Node *tail,
     graph->add_edge(AGID(e), this);
 }
 
+Edge::
+Edge(Graph *graph,
+     Agedge_t *e)
+    : graph(graph), e(e)
+{
+    tail = graph->get_node(AGID(agtail(e)));
+    head = graph->get_node(AGID(aghead(e)));
+
+    /* TODO: Restore weights. */
+}
+
 }

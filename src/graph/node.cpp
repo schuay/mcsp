@@ -10,4 +10,12 @@ Node(Graph *graph)
     graph->add_node(AGID(n), this);
 }
 
+Node::
+Node(Graph *graph,
+     Agnode_t *n)
+    : graph(graph), n(n)
+{
+    graph->add_node(AGID(n), this);
+}
+
 }

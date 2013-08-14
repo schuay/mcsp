@@ -14,6 +14,9 @@ public:
     Node(Graph *graph);
 
 private:
+    Node(Graph *graph, Agnode_t *n);
+
+private:
     Graph *graph;
     Agnode_t *n;
 };

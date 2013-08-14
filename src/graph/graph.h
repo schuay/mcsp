@@ -29,6 +29,9 @@ public:
 private:
     Graph(Agraph_t *g);
 
+    Node *get_node(const ulong id) const;
+    Edge *get_edge(const ulong id) const;
+
     void add_node(const ulong id,
                   Node *n);
     void add_edge(const ulong id,

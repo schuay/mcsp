@@ -1,5 +1,7 @@
 #include "graph.h"
 
+#include <stdexcept>
+
 #include "edge.h"
 #include "node.h"
 
@@ -15,7 +17,16 @@ Graph::
 Graph(Agraph_t *g)
     : g(g)
 {
-    /* TODO: Construct all edges and nodes. */
+    for (Agnode_t *n = agfstnode(g); n != nullptr; n = agnxtnode(g, n)) {
+        new Node(this, n);
+    }
+
+    for (auto &p : nodes) {
+        Agnode_t *n = p.second->n;
+        for (Agedge_t *e = agfstout(g, n); e != nullptr; e = agnxtout(g, e)) {
+            new Edge(this, e);
+        }
+    }
 }
 
 Graph::
@@ -54,6 +65,28 @@ contains_edge(const Node *tail,
 {
     Agedge_t *e = agedge(g, tail->n, head->n, NULL, FALSE);
     return (e != nullptr);
+}
+
+Node *
+Graph::
+get_node(const ulong id) const
+{
+    try {
+        return nodes.at(id);
+    } catch (const std::out_of_range &) {
+        return nullptr;
+    }
+}
+
+Edge *
+Graph::
+get_edge(const ulong id) const
+{
+    try {
+        return edges.at(id);
+    } catch (const std::out_of_range &) {
+        return nullptr;
+    }
 }
 
 void
