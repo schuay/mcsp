@@ -50,10 +50,8 @@ generate_rDAG(const std::string& name,
       tail = rand() % n;
       do {
          head = rand() % n;
-      } while(head == tail);
-          
-      //TDOO: check of parallel edges are allowed
-      
+      } while(head == tail || (!allow_parallel_edges && g.contains_edge(tree[tail], tree[head])));
+               
       g.add_edge(tree[tail], tree[head], generate_weight_vector(weight_limits));
    }
    return g;
