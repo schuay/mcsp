@@ -25,7 +25,7 @@ generate_rDiGraph(const std::string& name,
    
    /*  Generate a random permutation in the array tree. */
    for (size_t i = 0; i < n; i++) {
-      tree.push_back(new Node(&g));
+      tree.push_back(g.add_node());
    }
    std::random_shuffle (tree.begin(), tree.end());
 
@@ -42,7 +42,7 @@ generate_rDiGraph(const std::string& name,
     
    for (head = 1; head < n; head++) {
       tail = rand() % head;
-      new Edge(tree[tail], tree[head], generate_weight_vector(weight_limits));      
+      g.add_edge(tree[tail], tree[head], generate_weight_vector(weight_limits));
    }
 
    /* Add additional random edges until achieving desired number */
@@ -54,7 +54,7 @@ generate_rDiGraph(const std::string& name,
           
       //TDOO: check of parallel edges are allowed
       
-      new Edge(tree[tail], tree[head], generate_weight_vector(weight_limits));   
+      g.add_edge(tree[tail], tree[head], generate_weight_vector(weight_limits));
    }
    return g;
 }

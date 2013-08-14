@@ -69,6 +69,24 @@ contains_edge(const Node *tail,
 
 Node *
 Graph::
+add_node()
+{
+    Node *n = new Node(this);
+    return n;
+}
+
+Edge *
+Graph::
+add_edge(Node *tail,
+         Node *head,
+         const std::vector<int> &weights)
+{
+    Edge *e = new Edge(tail, head, weights);
+    return e;
+}
+
+Node *
+Graph::
 get_node(const ulong id) const
 {
     try {

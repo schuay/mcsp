@@ -10,9 +10,9 @@ main(int argc,
 {
     graph::Graph g("g");
 
-    graph::Node *tail = new graph::Node(&g);
-    graph::Node *head = new graph::Node(&g);
-    graph::Edge *e = new graph::Edge(tail, head, { 1, 3, 5 });
+    graph::Node *tail = g.add_node();
+    graph::Node *head = g.add_node();
+    graph::Edge *e = g.add_edge(tail, head, { 1, 3, 5 });
 
     g.write(stdout);
 

@@ -11,12 +11,10 @@ class Edge
 {
     friend class Graph;
 
-public:
+private:
     Edge(Node *tail, 
          Node *head,
          const std::vector<int> &weights);
-
-private:
     Edge(Graph *graph,
          Agedge_t *e);
 

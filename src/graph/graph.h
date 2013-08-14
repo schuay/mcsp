@@ -3,8 +3,9 @@
 
 #include <graphviz/cgraph.h>
 #include <stdio.h>
-#include <unordered_map>
 #include <string>
+#include <unordered_map>
+#include <vector>
 
 namespace graph {
 
@@ -25,6 +26,11 @@ public:
 
     bool contains_edge(const Node *tail,
                        const Node *head) const;
+
+    Node *add_node();
+    Edge *add_edge(Node *tail,
+                   Node *head,
+                   const std::vector<int> &weights);
 
 private:
     Graph(Agraph_t *g);

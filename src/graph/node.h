@@ -10,10 +10,8 @@ class Node
     friend class Edge;
     friend class Graph;
 
-public:
-    Node(Graph *graph);
-
 private:
+    Node(Graph *graph);
     Node(Graph *graph, Agnode_t *n);
 
 private:
