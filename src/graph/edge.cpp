@@ -7,19 +7,19 @@ namespace graph
 {
 
 Edge::
-Edge(Node *tail,
-     Node *head,
-     const std::vector<int> &weights)
-    : tail(tail), head(head), weights(weights)
+Edge(Node *t,
+     Node *h,
+     const std::vector<int> &ws)
+    : t(t), h(h), ws(ws)
 {
-    assert(tail->graph == head->graph);
+    assert(t->graph == h->graph);
 
-    graph = tail->graph;
-    e = agedge(graph->g, tail->n, head->n, NULL, TRUE);
+    graph = t->graph;
+    e = agedge(graph->g, t->n, h->n, NULL, TRUE);
     graph->add_edge(AGID(e), this);
 
     std::stringstream ss;
-    for (auto i : weights) {
+    for (auto i : ws) {
         ss << i << " ";
     }
     agset(e, ATTR_WEIGHT, const_cast<char *>(ss.str().c_str()));
@@ -30,14 +30,35 @@ Edge(Graph *graph,
      Agedge_t *e)
     : graph(graph), e(e)
 {
-    tail = graph->get_node(AGID(agtail(e)));
-    head = graph->get_node(AGID(aghead(e)));
+    t = graph->get_node(AGID(agtail(e)));
+    h = graph->get_node(AGID(aghead(e)));
 
     std::stringstream ss(std::string(agget(e, ATTR_WEIGHT)));
     int w;
     while (ss >> w) {
-        weights.push_back(w);
+        ws.push_back(w);
     }
+}
+
+Node *
+Edge::
+tail() const
+{
+    return t;
+}
+
+Node *
+Edge::
+head() const
+{
+    return h;
+}
+
+std::vector<int>
+Edge::
+weights() const
+{
+    return ws;
 }
 
 }
