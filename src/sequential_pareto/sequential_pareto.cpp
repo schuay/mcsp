@@ -1,6 +1,6 @@
 #include "sequential_pareto.h"
 
-SequentialPareto::SequentialPareto()
+SequentialPareto::SequentialPareto(Graph &g, Node &start)
 {
 
 }
