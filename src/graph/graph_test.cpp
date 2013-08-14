@@ -5,14 +5,14 @@
 #include "edge.h"
 
 int
-main(int argc,
-     char **argv)
+main(int argc __attribute__((unused)),
+     char **argv __attribute__((unused)))
 {
     graph::Graph g("g");
 
     graph::Node *tail = g.add_node();
     graph::Node *head = g.add_node();
-    graph::Edge *e = g.add_edge(tail, head, { 1, 3, 5 });
+    g.add_edge(tail, head, { 1, 3, 5 });
 
     g.write(stdout);
 
