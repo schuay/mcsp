@@ -26,8 +26,9 @@ public:
                                     const size_t
                                     &m,                    /* Number of edges (n-1 <= m). If !allow_parallel_edges: m <= n*(n-1)  */
                                     const bool &allow_parallel_edges,   /* If true, graph may contain parallel edges */
-                                    const Wl &weight_limits);           /* Limits [min, max] for the weight vector of an edge.
-                                                                  length of vector = d = dimension of graph */
+                                    const Wl &weight_limits,            /* Limits [min, max] for the weight vector of an edge.
+                                                                           length of vector = d = dimension of graph */
+                                    const unsigned short seed);         /* seed value for rand() */
 
 private:
     /* generate a weight vector w with d = weight_limits.size elements and

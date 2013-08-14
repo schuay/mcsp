@@ -12,7 +12,8 @@ generate_rDiGraph(const std::string &name,
                   const size_t &n,
                   const size_t &m,
                   const bool &allow_parallel_edges,
-                  const std::vector<std::pair<int, int>> &weight_limits)
+                  const std::vector<std::pair<int, int>> &weight_limits,
+                  const unsigned short seed)
 {
     assert(n > 0);
     assert(m > n - 1);
@@ -41,7 +42,7 @@ generate_rDiGraph(const std::string &name,
           the tree.  Add an edge incident on tree[ i ]
           and a random vertex in the set {tree[ 0 ],...,tree[ i - 1 ]}.
      */
-    srand((unsigned short) time(NULL));
+    srand(seed);
 
     size_t tail, head;
 
