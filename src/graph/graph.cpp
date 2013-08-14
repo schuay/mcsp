@@ -11,6 +11,8 @@ Graph::
 Graph(const std::string &name)
 {
     g = agopen(const_cast<char *>(name.c_str()), Agdirected, NULL);
+
+    agattr(g, AGEDGE, ATTR_WEIGHT, const_cast<char *>(""));
 }
 
 Graph::

@@ -12,6 +12,8 @@ namespace graph {
 class Node;
 class Edge;
 
+#define ATTR_WEIGHT const_cast<char *>("weight")
+
 class Graph
 {
     friend class Node;
