@@ -106,6 +106,17 @@ get_node(const ulong id) const
     }
 }
 
+std::vector<Node *>
+Graph::
+get_nodes() const
+{
+    std::vector<Node *> ns;
+    for (auto & p : nodes) {
+        ns.push_back(p.second);
+    }
+    return ns;
+}
+
 Edge *
 Graph::
 get_edge(const ulong id) const

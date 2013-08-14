@@ -38,6 +38,7 @@ public:
     size_t node_count() const;
 
     Node *get_node(const ulong id) const;
+    std::vector<Node *> get_nodes() const;
 
 private:
     Graph(Agraph_t *g);
