@@ -61,7 +61,7 @@ write(FILE *f)
 bool
 Graph::
 contains_edge(const Node *tail,
-              const Node *head)
+              const Node *head) const
 {
     Agedge_t *e = agedge(g, tail->n, head->n, NULL, FALSE);
     return (e != nullptr);

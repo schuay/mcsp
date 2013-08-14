@@ -24,7 +24,7 @@ public:
     bool write(FILE *f);
 
     bool contains_edge(const Node *tail,
-                       const Node *head);
+                       const Node *head) const;
 
 private:
     Graph(Agraph_t *g);
