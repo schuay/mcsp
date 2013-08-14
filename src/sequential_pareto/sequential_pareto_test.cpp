@@ -3,6 +3,8 @@
 #include "generator/generator.h"
 #include "sequential_pareto.h"
 
+using namespace graph;
+
 int
 main(int argc __attribute__((unused)),
      char **argv __attribute__((unused)))

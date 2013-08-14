@@ -9,7 +9,7 @@
 class SequentialPareto
 {
 public:
-    SequentialPareto(Graph &g, Node &start);
+    SequentialPareto(graph::Graph &g, graph::Node &start);
 
 private:
     std::set<graph::Edge> pq;

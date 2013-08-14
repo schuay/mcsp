@@ -6,6 +6,8 @@
 #include <ctime>
 #include <cstdlib>
 
+using namespace graph;
+
 Graph *
 Generator::
 generate_rDiGraph(const std::string &name,
@@ -21,7 +23,7 @@ generate_rDiGraph(const std::string &name,
         assert(m < n * (n - 1));
     }
 
-    for (auto it : weight_limits) {
+    for (auto & it : weight_limits) {
         assert(it.first <= it.second);
     }
 
@@ -68,7 +70,7 @@ Generator::
 generate_weight_vector(const Wl &weight_limits)
 {
     std::vector<int> weights;
-    for (auto it : weight_limits) {
+    for (auto & it : weight_limits) {
         int w = it.first + rand() % (it.second - it.first + 1);
         weights.push_back(w);
     }
