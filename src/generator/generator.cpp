@@ -5,7 +5,6 @@
 #include <cmath>
 #include <ctime>
 #include <cstdlib>
-#include <vector>
 
 Graph *
 Generator::

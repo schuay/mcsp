@@ -9,3 +9,11 @@ add_library(generator
 target_link_libraries(generator
     graph
 )
+
+add_executable(generator_test
+    generator_test.cpp
+)
+
+target_link_libraries(generator_test
+    generator
+)
