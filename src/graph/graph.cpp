@@ -12,6 +12,13 @@ Graph(const std::string &name)
 }
 
 Graph::
+Graph(Agraph_t *g)
+    : g(g)
+{
+    /* TODO: Construct all edges and nodes. */
+}
+
+Graph::
 ~Graph()
 {
     for (auto &n : nodes) {
@@ -23,6 +30,21 @@ Graph::
     }
 
     agclose(g);
+}
+
+Graph *
+Graph::
+read(FILE *f)
+{
+    Agraph_t *g = agread(f, NULL);
+    return new Graph(g);
+}
+
+bool
+Graph::
+write(FILE *f)
+{
+    return (agwrite(g, f) > 0);
 }
 
 bool

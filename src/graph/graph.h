@@ -2,6 +2,7 @@
 #define __GRAPH_H
 
 #include <graphviz/cgraph.h>
+#include <stdio.h>
 #include <unordered_map>
 #include <string>
 
@@ -19,10 +20,15 @@ public:
     Graph(const std::string &name);
     virtual ~Graph();
 
+    static Graph *read(FILE *f);
+    bool write(FILE *f);
+
     bool contains_edge(const Node *tail,
                        const Node *head);
 
 private:
+    Graph(Agraph_t *g);
+
     void add_node(const ulong id,
                   Node *n);
     void add_edge(const ulong id,
