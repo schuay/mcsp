@@ -2,8 +2,8 @@
 #define __GRAPH_H
 
 #include <graphviz/cgraph.h>
+#include <unordered_map>
 #include <string>
-#include <vector>
 
 namespace graph {
 
@@ -20,14 +20,16 @@ public:
     virtual ~Graph();
 
 private:
-    void add_node(Node *n);
-    void add_edge(Edge *e);
+    void add_node(const ulong id,
+                  Node *n);
+    void add_edge(const ulong id,
+                  Edge *e);
 
 private:
     Agraph_t *g;
 
-    std::vector<Node *> nodes;
-    std::vector<Edge *> edges;
+    std::unordered_map<ulong, Node *> nodes;
+    std::unordered_map<ulong, Edge *> edges;
 };
 
 }

@@ -14,7 +14,7 @@ Edge(Node *tail,
 
     graph = tail->graph;
     e = agedge(graph->g, tail->n, head->n, NULL, TRUE);
-    graph->add_edge(this);
+    graph->add_edge(AGID(e), this);
 }
 
 }
