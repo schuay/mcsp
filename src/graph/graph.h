@@ -37,10 +37,11 @@ public:
 
     size_t node_count() const;
 
+    Node *get_node(const ulong id) const;
+
 private:
     Graph(Agraph_t *g);
 
-    Node *get_node(const ulong id) const;
     Edge *get_edge(const ulong id) const;
 
     void add_node(const ulong id,
