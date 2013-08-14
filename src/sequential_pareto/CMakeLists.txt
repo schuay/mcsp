@@ -1,5 +1,5 @@
 include_directories(
-    ${CMAKE_SOURCE_DIR}/uthash/src
+    ${CMAKE_SOURCE_DIR}/src
 )
 
 add_library(sequential_pareto
@@ -8,7 +8,6 @@ add_library(sequential_pareto
 
 target_link_libraries(sequential_pareto
     graph
-    generator
 )
 
 add_executable(sequential_pareto_test
@@ -16,5 +15,6 @@ add_executable(sequential_pareto_test
 )
 
 target_link_libraries(sequential_pareto_test
+    generator
     sequential_pareto
 )
