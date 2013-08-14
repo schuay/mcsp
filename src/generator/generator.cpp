@@ -18,6 +18,10 @@ generate_rDAG(const std::string& name,
    assert(m > n-1);
    if(!allow_parallel_edges)
         assert(m < n*(n-1));
+        
+   for (auto it : weight_limits) {
+        assert(it.first <= it.second);
+   }
    
    Graph *g = new Graph(name);
    
