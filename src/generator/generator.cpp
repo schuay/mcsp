@@ -63,7 +63,7 @@ generate_weight_vector(const Wl &weight_limits)
 {
    std::vector<int> weights;
    for (auto it : weight_limits) {
-      int w = it.first + rand() % (it.second - it.first);
+      int w = it.first + rand() % (it.second - it.first + 1);
       weights.push_back(w);
    }
    return weights;
