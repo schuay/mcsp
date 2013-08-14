@@ -88,6 +88,13 @@ add_edge(Node *tail,
     return e;
 }
 
+size_t
+Graph::
+node_count() const
+{
+    return agnnodes(g);
+}
+
 Node *
 Graph::
 get_node(const ulong id) const

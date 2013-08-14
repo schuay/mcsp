@@ -35,6 +35,8 @@ public:
                    Node *head,
                    const std::vector<int> &weights);
 
+    size_t node_count() const;
+
 private:
     Graph(Agraph_t *g);
 
