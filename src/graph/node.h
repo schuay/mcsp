@@ -8,6 +8,7 @@ namespace graph {
 class Node
 {
     friend class Edge;
+    friend class Graph;
 
 public:
     Node(Graph *graph);

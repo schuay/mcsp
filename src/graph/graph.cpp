@@ -25,6 +25,15 @@ Graph::
     agclose(g);
 }
 
+bool
+Graph::
+contains_edge(const Node *tail,
+              const Node *head)
+{
+    Agedge_t *e = agedge(g, tail->n, head->n, NULL, FALSE);
+    return (e != nullptr);
+}
+
 void
 Graph::
 add_node(const ulong id,

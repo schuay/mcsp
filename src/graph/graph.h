@@ -19,6 +19,9 @@ public:
     Graph(const std::string &name);
     virtual ~Graph();
 
+    bool contains_edge(const Node *tail,
+                       const Node *head);
+
 private:
     void add_node(const ulong id,
                   Node *n);
