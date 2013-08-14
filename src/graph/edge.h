@@ -5,14 +5,15 @@
 
 #include "node.h"
 
-namespace graph {
+namespace graph
+{
 
 class Edge
 {
     friend class Graph;
 
 private:
-    Edge(Node *tail, 
+    Edge(Node *tail,
          Node *head,
          const std::vector<int> &weights);
     Edge(Graph *graph,

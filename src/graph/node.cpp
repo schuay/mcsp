@@ -1,6 +1,7 @@
 #include "node.h"
 
-namespace graph {
+namespace graph
+{
 
 Node::
 Node(Graph *graph)

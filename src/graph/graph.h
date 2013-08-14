@@ -7,7 +7,8 @@
 #include <unordered_map>
 #include <vector>
 
-namespace graph {
+namespace graph
+{
 
 class Node;
 class Edge;

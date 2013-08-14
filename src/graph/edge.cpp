@@ -3,7 +3,8 @@
 #include <assert.h>
 #include <sstream>
 
-namespace graph {
+namespace graph
+{
 
 Edge::
 Edge(Node *tail,

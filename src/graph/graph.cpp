@@ -5,7 +5,8 @@
 #include "edge.h"
 #include "node.h"
 
-namespace graph {
+namespace graph
+{
 
 Graph::
 Graph(const std::string &name)
@@ -23,7 +24,7 @@ Graph(Agraph_t *g)
         new Node(this, n);
     }
 
-    for (auto &p : nodes) {
+    for (auto & p : nodes) {
         Agnode_t *n = p.second->n;
         for (Agedge_t *e = agfstout(g, n); e != nullptr; e = agnxtout(g, e)) {
             new Edge(this, e);
@@ -34,11 +35,11 @@ Graph(Agraph_t *g)
 Graph::
 ~Graph()
 {
-    for (auto &n : nodes) {
+    for (auto & n : nodes) {
         delete n.second;
     }
 
-    for (auto &e : edges) {
+    for (auto & e : edges) {
         delete e.second;
     }
 
