@@ -1,19 +1,19 @@
+#include "generator.h"
 
 #include <algorithm>
 #include <assert.h>
-#include "generator.h"
 #include <cmath>
 #include <ctime>
 #include <cstdlib>
 #include <vector>
 
 Graph
-Generator::generate_rDAG(const std::string& name, 
-generate_rDiGraph(const std::string& name,
-                           const size_t& n, 
-                           const size_t& m, 
-                           const bool& allow_parallel_edges, 
-                           const std::vector<std::pair<int, int>>& weight_limits)
+Generator::
+generate_rDAG(const std::string& name,
+              const size_t &n,
+              const size_t &m,
+              const bool &allow_parallel_edges,
+              const std::vector<std::pair<int, int>> &weight_limits)
 {
    assert(n > 0);
    assert(m > n-1);
@@ -59,7 +59,9 @@ generate_rDiGraph(const std::string& name,
    return g;
 }
 
-std::vector<int> Generator::generate_weight_vector(const Wl& weight_limits)
+std::vector<int>
+Generator::
+generate_weight_vector(const Wl &weight_limits)
 {
    std::vector<int> weights;
    for (auto it : weight_limits) {
