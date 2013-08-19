@@ -10,10 +10,10 @@ target_link_libraries(generator
     graph
 )
 
-add_executable(generator_test
-    generator_test.cpp
+add_executable(gengraph
+    gengraph.cpp
 )
 
-target_link_libraries(generator_test
+target_link_libraries(gengraph
     generator
 )
