@@ -14,10 +14,7 @@ class ShortestPaths
 public:
     virtual ~ShortestPaths();
 
-    std::unordered_map<graph::Node *, Paths> paths() const;
-
-private:
-    std::unordered_map<graph::Node *, Paths> m_paths;
+    std::unordered_map<const graph::Node *, Paths> paths;
 };
 
 }

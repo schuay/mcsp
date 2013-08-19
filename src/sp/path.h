@@ -14,11 +14,17 @@ typedef std::vector<Path *> Paths;
 class Path
 {
 public:
-    std::vector<graph::Edge *> edges() const;
+    Path(const graph::Node *init);
+
+    const graph::Node *tail() const;
+    const graph::Node *head() const;
+    std::vector<const graph::Edge *> edges() const;
     std::vector<graph::weight_t> weight() const;
 
 private:
-    std::vector<graph::Edge *> m_edges;
+    const graph::Node *m_tail;
+    const graph::Node *m_head;
+    std::vector<const graph::Edge *> m_edges;
     std::vector<graph::weight_t> m_weight;
 };
 

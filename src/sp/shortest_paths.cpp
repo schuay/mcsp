@@ -6,7 +6,7 @@ namespace sp
 ShortestPaths::
 ~ShortestPaths()
 {
-    for (auto & p : m_paths) {
+    for (auto & p : paths) {
         for (auto & path : p.second) {
             delete path;
         }
