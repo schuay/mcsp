@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 #include "generator/generator.h"
-#include "sequential_pareto.h"
+#include "sequential.h"
 
 using namespace graph;
 
