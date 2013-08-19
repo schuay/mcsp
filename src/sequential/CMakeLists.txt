@@ -11,11 +11,11 @@ target_link_libraries(sequential
     sp
 )
 
-add_executable(sequential_test
-    sequential_test.cpp
+add_executable(smcsp
+    smcsp.cpp
 )
 
-target_link_libraries(sequential_test
+target_link_libraries(smcsp
     generator
     sequential
 )

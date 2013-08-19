@@ -7,18 +7,22 @@
 
 using namespace graph;
 
+#define N (10)
+#define M (15)
+#define SEED (42)
+#define START (1)
+
 int
 main(int argc __attribute__((unused)),
      char **argv __attribute__((unused)))
 {
-    graph::Generator::Wl wl;
+    Generator::Wl wl;
     wl.push_back(std::pair<int, int>(0, 1));
     wl.push_back(std::pair<int, int>(3, 10));
     wl.push_back(std::pair<int, int>(-2, 2));
-    Graph *g = graph::Generator::generate_rDiGraph("test graph", 10, 15, true, wl,
-               (unsigned short) time(NULL));
+    Graph *g = Generator::generate_rDiGraph("g", N, M, true, wl, SEED);
 
-    Node *n = g->get_node(1);
+    Node *n = g->get_node(START);
     assert(n);
 
     Sequential seq(g, n);
