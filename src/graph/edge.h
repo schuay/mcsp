@@ -21,13 +21,15 @@ private:
     Edge(Graph *graph,
          Agedge_t *e);
 
+    Graph *graph() const;
+
     Node *tail() const;
     Node *head() const;
 
     std::vector<weight_t> weights() const;
 
 private:
-    Graph *graph;
+    Graph *m_graph;
     Node *t, *h;
     Agedge_t *e;
 

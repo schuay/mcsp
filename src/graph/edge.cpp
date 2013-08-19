@@ -12,12 +12,12 @@ Edge(Node *t,
      const std::vector<weight_t> &ws)
     : t(t), h(h), ws(ws)
 {
-    assert(t->graph == h->graph);
-    assert(ws.size() == t->graph->degree());
+    assert(t->graph() == h->graph());
+    assert(ws.size() == t->graph()->degree());
 
-    graph = t->graph;
-    e = agedge(graph->g, t->n, h->n, NULL, TRUE);
-    graph->add_edge(AGID(e), this);
+    m_graph = t->graph();
+    e = agedge(m_graph->g, t->n, h->n, NULL, TRUE);
+    m_graph->add_edge(AGID(e), this);
 
     std::stringstream ss;
     for (auto i : ws) {
@@ -29,10 +29,10 @@ Edge(Node *t,
 Edge::
 Edge(Graph *graph,
      Agedge_t *e)
-    : graph(graph), e(e)
+    : m_graph(graph), e(e)
 {
-    t = graph->get_node(AGID(agtail(e)));
-    h = graph->get_node(AGID(aghead(e)));
+    t = m_graph->get_node(AGID(agtail(e)));
+    h = m_graph->get_node(AGID(aghead(e)));
 
     std::stringstream ss(std::string(agget(e, ATTR_WEIGHT)));
     weight_t w;
@@ -40,7 +40,14 @@ Edge(Graph *graph,
         ws.push_back(w);
     }
 
-    assert(ws.size() == graph->degree());
+    assert(ws.size() == m_graph->degree());
+}
+
+Graph *
+Edge::
+graph() const
+{
+    return m_graph;
 }
 
 Node *

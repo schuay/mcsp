@@ -16,6 +16,8 @@ class Node
 public:
     ulong id() const;
 
+    Graph *graph() const;
+
     std::vector<Edge *> out_edges() const;
 
 private:
@@ -23,7 +25,7 @@ private:
     Node(Graph *graph, Agnode_t *n);
 
 private:
-    Graph *graph;
+    Graph *m_graph;
     Agnode_t *n;
 };
 
