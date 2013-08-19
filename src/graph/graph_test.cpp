@@ -8,7 +8,7 @@ int
 main(int argc __attribute__((unused)),
      char **argv __attribute__((unused)))
 {
-    graph::Graph g("g");
+    graph::Graph g("g", 3);
 
     graph::Node *tail = g.add_node();
     graph::Node *head = g.add_node();

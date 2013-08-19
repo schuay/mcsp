@@ -14,6 +14,7 @@ class Node;
 class Edge;
 
 #define ATTR_WEIGHT const_cast<char *>("weight")
+#define ATTR_DEGREE const_cast<char *>("degree")
 
 class Graph
 {
@@ -21,11 +22,14 @@ class Graph
     friend class Edge;
 
 public:
-    Graph(const std::string &name);
+    Graph(const std::string &name,
+          const size_t degree);
     virtual ~Graph();
 
     static Graph *read(FILE *f);
     bool write(FILE *f);
+
+    size_t degree() const;
 
     bool contains_edge(const Node *tail,
                        const Node *head) const;
@@ -52,6 +56,8 @@ private:
 
 private:
     Agraph_t *g;
+
+    size_t m_degree;
 
     std::unordered_map<ulong, Node *> nodes;
     std::unordered_map<ulong, Edge *> edges;

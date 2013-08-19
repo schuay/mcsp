@@ -13,6 +13,7 @@ Edge(Node *t,
     : t(t), h(h), ws(ws)
 {
     assert(t->graph == h->graph);
+    assert(ws.size() == t->graph->degree());
 
     graph = t->graph;
     e = agedge(graph->g, t->n, h->n, NULL, TRUE);
@@ -38,6 +39,8 @@ Edge(Graph *graph,
     while (ss >> w) {
         ws.push_back(w);
     }
+
+    assert(ws.size() == graph->degree());
 }
 
 Node *

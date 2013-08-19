@@ -9,17 +9,24 @@ namespace graph
 {
 
 Graph::
-Graph(const std::string &name)
+Graph(const std::string &name,
+      const size_t degree)
+    : m_degree(degree)
 {
     g = agopen(const_cast<char *>(name.c_str()), Agdirected, NULL);
 
+    agattr(g, AGRAPH, ATTR_DEGREE, const_cast<char *>(""));
     agattr(g, AGEDGE, ATTR_WEIGHT, const_cast<char *>(""));
+
+    agset(g, ATTR_DEGREE, const_cast<char *>(std::to_string(degree).c_str()));
 }
 
 Graph::
 Graph(Agraph_t *g)
     : g(g)
 {
+    m_degree = std::stoi(agget(g, ATTR_DEGREE));
+
     for (Agnode_t *n = agfstnode(g); n != nullptr; n = agnxtnode(g, n)) {
         new Node(this, n);
     }
@@ -59,6 +66,13 @@ Graph::
 write(FILE *f)
 {
     return (agwrite(g, f) > 0);
+}
+
+size_t
+Graph::
+degree() const
+{
+    return m_degree;
 }
 
 bool

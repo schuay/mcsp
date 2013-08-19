@@ -27,7 +27,7 @@ generate_rDiGraph(const std::string &name,
         assert(it.first <= it.second);
     }
 
-    Graph *g = new Graph(name);
+    Graph *g = new Graph(name, weight_limits.size());
 
     std::vector<Node *> tree;
 
