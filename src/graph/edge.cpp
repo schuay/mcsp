@@ -9,7 +9,7 @@ namespace graph
 Edge::
 Edge(Node *t,
      Node *h,
-     const std::vector<int> &ws)
+     const std::vector<weight_t> &ws)
     : t(t), h(h), ws(ws)
 {
     assert(t->graph == h->graph);
@@ -34,7 +34,7 @@ Edge(Graph *graph,
     h = graph->get_node(AGID(aghead(e)));
 
     std::stringstream ss(std::string(agget(e, ATTR_WEIGHT)));
-    int w;
+    weight_t w;
     while (ss >> w) {
         ws.push_back(w);
     }
@@ -54,7 +54,7 @@ head() const
     return h;
 }
 
-std::vector<int>
+std::vector<weight_t>
 Edge::
 weights() const
 {
