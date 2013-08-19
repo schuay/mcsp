@@ -10,6 +10,7 @@ Path::
 Path(const graph::Node *init)
     : m_tail(init), m_head(init)
 {
+    m_weight.resize(init->graph()->degree(), 0);
 }
 
 const Node *
