@@ -8,6 +8,7 @@ add_library(sequential
 
 target_link_libraries(sequential
     graph
+    sp
 )
 
 add_executable(sequential_test
