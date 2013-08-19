@@ -1,19 +1,35 @@
 #include "less.h"
 
+#include <assert.h>
+
+using namespace graph;
+using namespace sp;
+
+using std::vector;
+
 namespace pareto
 {
 
 bool
 less::
-operator()(const sp::Path *lhs,
-           const sp::Path *rhs) const
+operator()(const Path *lhs,
+           const Path *rhs) const
 {
-    (void)lhs;
-    (void)rhs;
+    assert(lhs && rhs);
 
-    /* TODO */
+    const vector<graph::weight_t> l = lhs->weight();
+    const vector<graph::weight_t> r = rhs->weight();
 
-    return false;
+    assert(l.size() == r.size());
+    const int dims = l.size();
+
+    for (int i = 0; i < dims; i++) {
+        if (l[i] > r[i]) {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 }
