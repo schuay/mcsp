@@ -6,6 +6,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include "less.h"
+
 namespace pareto
 {
 
@@ -37,6 +39,8 @@ private:
 private:
     node_ptrs_t m_elems_by_head;
     elem_t *m_list;
+
+    less dominates;
 };
 
 }

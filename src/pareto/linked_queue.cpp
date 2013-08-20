@@ -36,6 +36,39 @@ void
 LinkedQueue::
 insert(Path *path)
 {
+    const Node *head = path->head();
+    std::unordered_set<elem_t *> &elems = m_elems_by_head[head];
+
+    /* First, insert the new element. */
+
+    elem_t *elem = list_insert(path);
+    elems.insert(elem);
+
+    /* Then, prune all dominated elements within this node's path set. */
+
+    for (auto it = elems.begin(); it != elems.end();) {
+        elem_t *other = *it;
+
+        if (other == elem) {
+            it++;
+            continue;
+        }
+
+        if (dominates(elem->path, other->path)) {
+            /* Remove other. */
+            elems.erase(it++);
+            list_erase(other);
+        } else if (dominates(other->path, elem->path)) {
+            /* Remove elem. Break from loop, since we only insert a single new
+             * element, domination is transitive, and within the original
+             * queue no paths dominate each other within a node set. */
+            elems.erase(elem);
+            list_erase(elem);
+            return;
+        } else { /* No domination in either direction. */
+            it++;
+        }
+    }
 }
 
 LinkedQueue::elem_t *
