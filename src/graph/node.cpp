@@ -34,6 +34,7 @@ Node::
 Node(Graph *graph)
     : m_graph(graph)
 {
+    /* TODO: Add a node "label" attribute. */
     n = agnode(m_graph->g, NULL, TRUE);
     m_graph->add_node(AGID(n), this);
 }
