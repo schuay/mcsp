@@ -1,6 +1,7 @@
 #include "path.h"
 
 #include <assert.h>
+#include <stdio.h>
 
 using namespace graph;
 using std::vector;
@@ -32,6 +33,21 @@ step(const Edge *edge) const
     }
 
     return p;
+}
+
+void
+Path::
+print() const
+{
+    printf("%lu", m_tail->id());
+    for (const auto e : m_edges) {
+        printf(" -> %lu", e->head()->id());
+    }
+    printf(" (");
+    for (const auto & w : m_weight) {
+        printf("%d ", w);
+    }
+    printf(")\n");
 }
 
 const Node *

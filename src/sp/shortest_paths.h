@@ -14,6 +14,9 @@ class ShortestPaths
 public:
     virtual ~ShortestPaths();
 
+    void print() const;
+
+public:
     std::unordered_map<const graph::Node *, Paths> paths;
 };
 

@@ -20,6 +20,8 @@ public:
      *  by appending the given edge to the current path. */
     Path *step(const graph::Edge *edge) const;
 
+    void print() const;
+
     const graph::Node *tail() const;
     const graph::Node *head() const;
     std::vector<const graph::Edge *> edges() const;

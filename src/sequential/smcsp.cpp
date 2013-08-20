@@ -23,6 +23,10 @@ main(int argc __attribute__((unused)),
 
     sp::ShortestPaths *sp = seq.shortest_paths();
 
+    g->write(stdout);
+    printf("\nShortest paths:\n");
+    sp->print();
+
     delete sp;
     delete g;
 
