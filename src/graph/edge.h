@@ -11,6 +11,11 @@ namespace graph
 class Edge
 {
     friend class Graph;
+public:
+    Node *tail() const;
+    Node *head() const;
+
+    graph::weight_vector_t weights() const;
 
 private:
     Edge(Node *t,
@@ -20,11 +25,6 @@ private:
          Agedge_t *e);
 
     Graph *graph() const;
-
-    Node *tail() const;
-    Node *head() const;
-
-    graph::weight_vector_t weights() const;
 
 private:
     Graph *m_graph;
