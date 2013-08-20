@@ -1,5 +1,7 @@
 #include "path.h"
 
+#include <assert.h>
+
 using namespace graph;
 using std::vector;
 
@@ -17,7 +19,19 @@ Path *
 Path::
 step(const Edge *edge) const
 {
-    return nullptr; /* TODO */
+    graph::weight_vector_t ws = edge->weights();
+    assert(ws.size() == m_weight.size());
+
+    Path *p = new Path(*this);
+
+    p->m_head = edge->head();
+    p->m_edges.push_back(edge);
+
+    for (size_t i = 0; i < ws.size(); i++) {
+        p->m_weight[i] += ws[i];
+    }
+
+    return p;
 }
 
 const Node *
