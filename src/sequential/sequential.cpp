@@ -30,17 +30,25 @@ shortest_paths()
         m_queue.erase(it);
 
         /* h = path.head
-         * for all outgoing edges <- h:
-         *      follow the edge
-         *      construct the resulting weight
-         *      compare it to existing weights for target node in set
-         *      if it's smaller:
-         *          remove path for target node from set
-         *          re-add new path for target node to set
+         * add the weight of the current path to the optima list
+         * for all outgoing edges e = (tail, head) <- h:
+         *      follow the edge, resulting in path p and weight w
+         *      compare it to existing path weights for target node in set:
+         *      for all dominated paths p':
+         *          remove p' from queue
+         *      if p is not dominated by any existing path to head:
+         *          add p to queue
          *
          * We have a problem here. The STL set compares for equality using two
          * applications of the Compare functor (not a < b && not a > b), which
          * does not guarantee identity in the case of our pareto comparator.
+         *
+         * Required operations:
+         *
+         * * queue.min(): return first (dominating) element {head, path}.
+         * * queue.erase(iterator or element): remove a specific element from the queue.
+         * * queue.insert(element)
+         * * retrieve all existing paths to a specific node
          */
     }
 
