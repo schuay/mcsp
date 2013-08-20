@@ -78,9 +78,9 @@ Generator::
 generate_basicTestGraph(const unsigned short seed)
 {
     Wl wl;
-    wl.push_back(std::pair<int, int>(0, 1));
+    wl.push_back(std::pair<int, int>(0, 5));
     wl.push_back(std::pair<int, int>(3, 10));
-    wl.push_back(std::pair<int, int>(-2, 2));
+    wl.push_back(std::pair<int, int>(1, 7));
     return Generator::generate_rDiGraph("g", N, M, true, wl, seed);
 }
 
