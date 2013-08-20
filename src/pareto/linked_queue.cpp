@@ -1,5 +1,7 @@
 #include "linked_queue.h"
 
+#include <queue>
+
 using namespace graph;
 using namespace sp;
 
@@ -29,7 +31,24 @@ std::vector<Path *>
 LinkedQueue::
 first(const size_t n)
 {
-    return { };
+    std::priority_queue<elem_t *, std::vector<elem_t *>, elem_greater> q;
+
+    for (elem_t *n = m_list; n != nullptr; n = n->next) {
+        q.push(n);
+    }
+
+    std::vector<Path *> ps;
+    for (size_t i = 0; i < n && !q.empty(); i++) {
+        elem_t *n = q.top();
+        q.pop();
+
+        ps.push_back(n->path);
+
+        m_elems_by_head[n->path->head()].erase(n);
+        list_erase(n);
+    }
+
+    return ps;
 }
 
 void

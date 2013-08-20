@@ -29,6 +29,16 @@ private:
         sp::Path *path;
     } elem_t;
 
+    class elem_greater
+    {
+    public:
+        less dominates;
+
+        bool operator()(const elem_t *lhs, const elem_t *rhs) const {
+            return dominates(rhs->path, lhs->path);
+        }
+    };
+
     typedef std::unordered_map<const graph::Node *, std::unordered_set<elem_t *>>
             node_ptrs_t;
 
