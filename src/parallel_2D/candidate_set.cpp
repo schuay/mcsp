@@ -15,7 +15,7 @@ CandidateSet::
 insert(const candidate_t &candidate)
 {
     assert(dim == candidate.second.size());
-    candidates.insert(candidate);
+    m_candidates.insert(candidate);
 
     return true;
 }
@@ -28,6 +28,21 @@ insert(graph::Node &node, graph::weight_vector_t &weight)
     insert(candidate);
 
     return true;
+}
+
+void
+CandidateSet::
+print() const
+{
+    for (auto c : m_candidates) {
+        printf("%lu", c.first.id());
+
+        printf(" (");
+        for (const auto & w : c.second) {
+            printf("%d ", w);
+        }
+        printf(")\n");
+    }
 }
 
 }

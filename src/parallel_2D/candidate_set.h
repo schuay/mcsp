@@ -23,8 +23,10 @@ public:
     bool insert(const candidate_t &candidate);
     bool insert(graph::Node &node, graph::weight_vector_t &weight);
 
+    void print() const;
+
 private:
-    std::set<candidate_t> candidates;
+    std::set<candidate_t> m_candidates;
     const size_t dim = 2;
 
 private:
