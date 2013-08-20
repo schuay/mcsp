@@ -16,11 +16,7 @@ int
 main(int argc __attribute__((unused)),
      char **argv __attribute__((unused)))
 {
-    Generator::Wl wl;
-    wl.push_back(std::pair<int, int>(0, 1));
-    wl.push_back(std::pair<int, int>(3, 10));
-    wl.push_back(std::pair<int, int>(-2, 2));
-    Graph *g = Generator::generate_rDiGraph("g", N, M, true, wl, SEED);
+    Graph *g = Generator::generate_basicTestGraph(SEED);
 
     Node *n = g->get_node(START);
     assert(n);

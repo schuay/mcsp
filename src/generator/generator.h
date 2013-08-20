@@ -26,6 +26,15 @@ public:
                                     const Wl &weight_limits,            /**< Limits [min, max] for the weight vector of an edge.
                                                                              length of vector = d = dimension of graph */
                                     const unsigned short seed);         /**< seed value for rand() */
+    /** generate a random connected directed graph with
+        N = 10
+        M = 15
+        name = "g"
+        parallel edges allowed
+        weight vector limits: [(0,1),(3,10),(-2,2)]
+      */
+    static Graph *generate_basicTestGraph(const unsigned short
+                                          seed);        /**< seed value for rand() */
 
 private:
     /** generate a weight vector w with d = weight_limits.size elements and

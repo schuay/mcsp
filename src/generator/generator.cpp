@@ -6,6 +6,9 @@
 #include <ctime>
 #include <cstdlib>
 
+#define N (10)
+#define M (15)
+
 using namespace graph;
 
 Graph *
@@ -63,6 +66,17 @@ generate_rDiGraph(const std::string &name,
         g->add_edge(tree[tail], tree[head], generate_weight_vector(weight_limits));
     }
     return g;
+}
+
+Graph *
+Generator::
+generate_basicTestGraph(const unsigned short seed)
+{
+    Wl wl;
+    wl.push_back(std::pair<int, int>(0, 1));
+    wl.push_back(std::pair<int, int>(3, 10));
+    wl.push_back(std::pair<int, int>(-2, 2));
+    return Generator::generate_rDiGraph("g", N, M, true, wl, seed);
 }
 
 std::vector<int>
