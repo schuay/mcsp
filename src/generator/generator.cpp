@@ -21,9 +21,9 @@ generate_rDiGraph(const std::string &name,
                   const unsigned short seed)
 {
     assert(n > 0);
-    assert(m > n - 1);
+    assert(m >= n - 1);
     if (!allow_parallel_edges) {
-        assert(m < n * (n - 1));
+        assert(m <= n * (n - 1));
     }
 
     for (auto & it : weight_limits) {
