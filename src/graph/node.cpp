@@ -3,6 +3,20 @@
 namespace graph
 {
 
+bool
+operator< (const graph::Node &lhs,
+           const graph::Node &rhs)
+{
+    return lhs.id() < rhs.id();
+}
+
+bool
+operator== (const graph::Node &lhs,
+            const graph::Node &rhs)
+{
+    return lhs.id() == rhs.id();
+}
+
 ulong
 Node::
 id() const
