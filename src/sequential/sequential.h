@@ -3,6 +3,7 @@
 
 #include "graph/edge.h"
 #include "graph/graph.h"
+#include "pareto/less.h"
 #include "pareto/linked_queue.h"
 #include "sp/shortest_paths.h"
 
@@ -19,6 +20,7 @@ private:
     const graph::Graph *graph;
     const graph::Node *start;
 
+    pareto::less dominates;
     pareto::LinkedQueue m_queue;
 };
 

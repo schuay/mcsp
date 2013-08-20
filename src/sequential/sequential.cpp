@@ -44,7 +44,25 @@ shortest_paths()
              *
              * TODO: Convert paths to shared pointers.
              */
-            m_queue.insert(p->step(e));
+            Path *q = p->step(e);
+            const Node *qhead = q->head();
+
+            /* A (somewhat ugly) special case for paths which are dominated by
+             * already final paths stored in ShortestPaths. */
+
+            bool dominated = false;
+            for (const auto & final_path : sp->paths[qhead]) {
+                if (dominates(final_path, q)) {
+                    dominated = true;
+                    break;
+                }
+            }
+
+            if (dominated) {
+                continue;
+            }
+
+            m_queue.insert(q);
         }
     }
 
