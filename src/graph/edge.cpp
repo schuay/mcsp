@@ -9,7 +9,7 @@ namespace graph
 Edge::
 Edge(Node *t,
      Node *h,
-     const std::vector<weight_t> &ws)
+     const weight_vector_t &ws)
     : t(t), h(h), ws(ws)
 {
     assert(t->graph() == h->graph());
@@ -64,7 +64,7 @@ head() const
     return h;
 }
 
-std::vector<weight_t>
+weight_vector_t
 Edge::
 weights() const
 {

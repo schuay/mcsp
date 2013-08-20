@@ -96,7 +96,7 @@ Edge *
 Graph::
 add_edge(Node *tail,
          Node *head,
-         const std::vector<int> &weights)
+         const weight_vector_t &weights)
 {
     Edge *e = new Edge(tail, head, weights);
     return e;

@@ -13,6 +13,9 @@ namespace graph
 class Node;
 class Edge;
 
+typedef int weight_t;
+typedef std::vector<weight_t> weight_vector_t;
+
 #define ATTR_WEIGHT const_cast<char *>("weight")
 #define ATTR_DEGREE const_cast<char *>("degree")
 
@@ -37,7 +40,7 @@ public:
     Node *add_node();
     Edge *add_edge(Node *tail,
                    Node *head,
-                   const std::vector<int> &weights);
+                   const weight_vector_t &weights);
 
     size_t node_count() const;
 

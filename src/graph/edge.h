@@ -8,8 +8,6 @@
 namespace graph
 {
 
-typedef int weight_t;
-
 class Edge
 {
     friend class Graph;
@@ -17,7 +15,7 @@ class Edge
 private:
     Edge(Node *t,
          Node *h,
-         const std::vector<weight_t> &ws);
+         const graph::weight_vector_t &ws);
     Edge(Graph *graph,
          Agedge_t *e);
 
@@ -26,14 +24,14 @@ private:
     Node *tail() const;
     Node *head() const;
 
-    std::vector<weight_t> weights() const;
+    graph::weight_vector_t weights() const;
 
 private:
     Graph *m_graph;
     Node *t, *h;
     Agedge_t *e;
 
-    std::vector<weight_t> ws;
+    graph::weight_vector_t ws;
 };
 
 }
