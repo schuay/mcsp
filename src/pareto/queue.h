@@ -32,6 +32,8 @@ public:
      * any other node <- ps.
      */
     virtual void insert(sp::Path *path) = 0;
+
+    virtual bool empty() const = 0;
 };
 
 }

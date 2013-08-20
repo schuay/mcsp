@@ -22,6 +22,7 @@ public:
 
     std::vector<sp::Path *> first(const size_t n);
     void insert(sp::Path *path);
+    bool empty() const;
 
 private:
     typedef struct elem_t {

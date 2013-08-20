@@ -90,6 +90,13 @@ insert(Path *path)
     }
 }
 
+bool
+LinkedQueue::
+empty() const
+{
+    return (m_list == nullptr);
+}
+
 LinkedQueue::elem_t *
 LinkedQueue::
 list_insert(Path *path)
