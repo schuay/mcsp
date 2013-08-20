@@ -13,6 +13,13 @@ Path(const graph::Node *init)
     m_weight.resize(init->graph()->degree(), 0);
 }
 
+Path *
+Path::
+step(const Edge *edge) const
+{
+    return nullptr; /* TODO */
+}
+
 const Node *
 Path::
 tail() const

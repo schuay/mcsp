@@ -16,6 +16,10 @@ class Path
 public:
     Path(const graph::Node *init);
 
+    /** Returns a new path object which represents the path generated
+     *  by appending the given edge to the current path. */
+    Path *step(const graph::Edge *edge) const;
+
     const graph::Node *tail() const;
     const graph::Node *head() const;
     std::vector<const graph::Edge *> edges() const;
