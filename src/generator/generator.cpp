@@ -22,6 +22,11 @@ generate_rDiGraph(const std::string &name,
 {
     assert(n > 0);
     assert(m >= n - 1);
+    //can't add any edges if g has less then 2 nodes
+    if (n < 2) {
+        assert(m == 0);
+    }
+
     if (!allow_parallel_edges) {
         assert(m <= n * (n - 1));
     }
