@@ -38,4 +38,22 @@ insert(Path *path)
 {
 }
 
+LinkedQueue::elem_t *
+LinkedQueue::
+list_insert(Path *path)
+{
+    elem_t *elem = new elem_t;
+    elem->path = path;
+    elem->prev = nullptr;
+    elem->next = m_list;
+
+    if (m_list != nullptr) {
+        m_list->prev = elem;
+    }
+    m_list = elem;
+
+    return elem;
+}
+
+
 }

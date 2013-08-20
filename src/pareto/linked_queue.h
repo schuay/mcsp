@@ -27,8 +27,11 @@ private:
         sp::Path *path;
     } elem_t;
 
-    typedef std::unordered_map<graph::Node *, std::unordered_set<elem_t *>>
+    typedef std::unordered_map<const graph::Node *, std::unordered_set<elem_t *>>
             node_ptrs_t;
+
+private:
+    elem_t *list_insert(sp::Path *path);
 
 private:
     node_ptrs_t m_elems_by_head;
