@@ -22,7 +22,7 @@ else()
 endif()
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    add_definitions("-Wall -Wextra -pedantic -std=c++11 -O3")
+    add_definitions("-Wall -Wextra -pedantic -std=c++11")
 endif()
 
 if(DOXYGEN_FOUND)
