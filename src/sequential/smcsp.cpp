@@ -7,8 +7,6 @@
 
 using namespace graph;
 
-#define N (10)
-#define M (15)
 #define SEED (42)
 #define START (1)
 
