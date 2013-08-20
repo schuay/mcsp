@@ -32,6 +32,7 @@ private:
 
 private:
     elem_t *list_insert(sp::Path *path);
+    void    list_erase(elem_t *elem);
 
 private:
     node_ptrs_t m_elems_by_head;

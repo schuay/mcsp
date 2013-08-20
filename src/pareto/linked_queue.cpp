@@ -55,5 +55,23 @@ list_insert(Path *path)
     return elem;
 }
 
+void
+LinkedQueue::
+list_erase(elem_t *elem)
+{
+    if (elem == m_list) {
+        m_list = elem->next;
+    }
+
+    if (elem->prev != nullptr) {
+        elem->prev->next = elem->next;
+    }
+
+    if (elem->next != nullptr) {
+        elem->next->prev = elem->prev;
+    }
+
+    delete elem;
+}
 
 }
