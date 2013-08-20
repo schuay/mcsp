@@ -1,4 +1,5 @@
 *.swp
 *~
+CMakeLists.txt.user
 build/
 notes.txt
