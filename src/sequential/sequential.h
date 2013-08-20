@@ -1,11 +1,9 @@
 #ifndef __SEQUENTIAL_H
 #define __SEQUENTIAL_H
 
-#include <set>
-
 #include "graph/edge.h"
 #include "graph/graph.h"
-#include "pareto/less.h"
+#include "pareto/linked_queue.h"
 #include "sp/shortest_paths.h"
 
 class Sequential
@@ -21,7 +19,7 @@ private:
     const graph::Graph *graph;
     const graph::Node *start;
 
-    std::set<sp::Path *, pareto::less> m_queue;
+    pareto::LinkedQueue m_queue;
 };
 
 #endif /* __SEQUENTIAL_H */

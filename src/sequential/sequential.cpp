@@ -14,42 +14,38 @@ ShortestPaths *
 Sequential::
 shortest_paths()
 {
-    /* 1. n = first node in queue.
-     * 2. expand all edges from node, update any in queue
-     * 3. repeat.
-     */
-
     ShortestPaths *sp = new ShortestPaths();
 
     Path *init = new Path(start);
     m_queue.insert(init);
 
     while (!m_queue.empty()) {
-        auto it = m_queue.begin();
-        Path *path = *it;
-        m_queue.erase(it);
+        /* Retrieve our next optimal candidate path. */
 
-        /* h = path.head
-         * add the weight of the current path to the optima list
-         * for all outgoing edges e = (tail, head) <- h:
-         *      follow the edge, resulting in path p and weight w
-         *      compare it to existing path weights for target node in set:
-         *      for all dominated paths p':
-         *          remove p' from queue
-         *      if p is not dominated by any existing path to head:
-         *          add p to queue
-         *
-         * We have a problem here. The STL set compares for equality using two
-         * applications of the Compare functor (not a < b && not a > b), which
-         * does not guarantee identity in the case of our pareto comparator.
-         *
-         * Required operations:
-         *
-         * * queue.min(): return first (dominating) element {head, path}.
-         * * queue.erase(iterator or element): remove a specific element from the queue.
-         * * queue.insert(element)
-         * * retrieve all existing paths to a specific node
-         */
+        Path *p = m_queue.first(1)[0];
+        const Node *head = p->head();
+
+        /* We've expanded up to head. The path is therefore optimal and must
+         * be added to our global shortest paths. */
+
+        sp->paths[head].push_back(p);
+
+        /* For all outgoing edges <- head: */
+
+        for (auto & e : head->out_edges()) {
+            /* The following steps are abstracted into queue.insert():
+             *
+             * Follow the edge, resulting in path p and weight w.
+             * Compare it to existing path weights for target node in set:
+             * For all dominated paths p':
+             *     Remove p' from queue.
+             * If p is not dominated by any existing path to head:
+             *     Add p to queue.
+             *
+             * TODO: Convert paths to shared pointers.
+             */
+            m_queue.insert(p->step(e));
+        }
     }
 
     return sp;
