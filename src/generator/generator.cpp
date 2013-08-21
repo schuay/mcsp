@@ -2,9 +2,7 @@
 
 #include <algorithm>
 #include <assert.h>
-#include <cmath>
-#include <ctime>
-#include <cstdlib>
+#include <random>
 
 #define N (10)
 #define M (15)
@@ -22,6 +20,7 @@ directed(const std::string &name,
 {
     assert(n > 0);
     assert(m >= n - 1);
+
     //can't add any edges if g has less then 2 nodes
     if (n < 2) {
         assert(m == 0);
@@ -35,15 +34,15 @@ directed(const std::string &name,
         assert(it.first <= it.second);
     }
 
+    std::default_random_engine random(seed);
     Graph *g = new Graph(name, weight_limits.size());
-
     std::vector<Node *> tree;
 
     /*  Generate a random permutation in the array tree. */
     for (size_t i = 0; i < n; i++) {
         tree.push_back(g->add_node());
     }
-    std::random_shuffle(tree.begin(), tree.end());
+    std::shuffle(tree.begin(), tree.end(), random);
 
     /*  Next generate a random spanning tree.
         The algorithm is:
@@ -52,20 +51,19 @@ directed(const std::string &name,
           the tree.  Add an edge incident on tree[ i ]
           and a random vertex in the set {tree[ 0 ],...,tree[ i - 1 ]}.
      */
-    srand(seed);
 
     size_t tail, head;
 
     for (head = 1; head < n; head++) {
-        tail = rand() % head;
+        tail = random() % head;
         g->add_edge(tree[tail], tree[head], generate_weight_vector(weight_limits));
     }
 
     /* Add additional random edges until achieving desired number */
     for (size_t i = n - 1; i < m; i++) {
-        tail = rand() % n;
+        tail = random() % n;
         do {
-            head = rand() % n;
+            head = random() % n;
         } while (head == tail || (!allow_parallel_edges && g->contains_edge(tree[tail], tree[head])));
 
         g->add_edge(tree[tail], tree[head], generate_weight_vector(weight_limits));
