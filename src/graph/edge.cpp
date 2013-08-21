@@ -24,7 +24,6 @@ Edge(Node *t,
         ss << i << " ";
     }
     agset(e, ATTR_WEIGHT, const_cast<char *>(ss.str().c_str()));
-    /* TODO: Add an edge label attribute. */
 }
 
 Edge::
