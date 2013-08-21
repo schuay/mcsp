@@ -20,14 +20,14 @@ public:
     LinkedQueue();
     virtual ~LinkedQueue();
 
-    std::vector<sp::Path *> first(const size_t n);
-    void insert(sp::Path *path);
+    std::vector<sp::PathPtr> first(const size_t n);
+    void insert(sp::PathPtr path);
     bool empty() const;
 
 private:
     typedef struct elem_t {
         struct elem_t *prev, *next;
-        sp::Path *path;
+        sp::PathPtr path;
     } elem_t;
 
     class elem_greater
@@ -36,7 +36,7 @@ private:
         less dominates;
 
         bool operator()(const elem_t *lhs, const elem_t *rhs) const {
-            return dominates(rhs->path, lhs->path);
+            return dominates(rhs->path.get(), lhs->path.get());
         }
     };
 
@@ -44,7 +44,7 @@ private:
             node_ptrs_t;
 
 private:
-    elem_t *list_insert(sp::Path *path);
+    elem_t *list_insert(sp::PathPtr path);
     void    list_erase(elem_t *elem);
 
 private:

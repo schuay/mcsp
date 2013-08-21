@@ -1,5 +1,7 @@
 #include "sequential.h"
 
+#include <memory>
+
 using namespace graph;
 using namespace sp;
 
@@ -16,13 +18,13 @@ shortest_paths()
 {
     ShortestPaths *sp = new ShortestPaths();
 
-    Path *init = new Path(start);
+    PathPtr init(new Path(start));
     m_queue.insert(init);
 
     while (!m_queue.empty()) {
         /* Retrieve our next optimal candidate path. */
 
-        Path *p = m_queue.first(1)[0];
+        PathPtr p = m_queue.first(1)[0];
         const Node *head = p->head();
 
         /* We've expanded up to head. The path is therefore optimal and must
@@ -41,10 +43,8 @@ shortest_paths()
              *     Remove p' from queue.
              * If p is not dominated by any existing path to head:
              *     Add p to queue.
-             *
-             * TODO: Convert paths to shared pointers.
              */
-            Path *q = p->step(e);
+            std::shared_ptr<Path> q(p->step(e));
             const Node *qhead = q->head();
 
             /* A (somewhat ugly) special case for paths which are dominated by
@@ -52,7 +52,7 @@ shortest_paths()
 
             bool dominated = false;
             for (const auto & final_path : sp->paths[qhead]) {
-                if (dominates(final_path, q)) {
+                if (dominates(final_path.get(), q.get())) {
                     dominated = true;
                     break;
                 }

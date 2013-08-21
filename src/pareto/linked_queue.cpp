@@ -27,7 +27,7 @@ LinkedQueue::
     }
 }
 
-std::vector<Path *>
+std::vector<PathPtr>
 LinkedQueue::
 first(const size_t n)
 {
@@ -37,7 +37,7 @@ first(const size_t n)
         q.push(n);
     }
 
-    std::vector<Path *> ps;
+    std::vector<PathPtr> ps;
     for (size_t i = 0; i < n && !q.empty(); i++) {
         elem_t *n = q.top();
         q.pop();
@@ -53,7 +53,7 @@ first(const size_t n)
 
 void
 LinkedQueue::
-insert(Path *path)
+insert(PathPtr path)
 {
     const Node *head = path->head();
     std::unordered_set<elem_t *> &elems = m_elems_by_head[head];
@@ -73,11 +73,11 @@ insert(Path *path)
             continue;
         }
 
-        if (dominates(elem->path, other->path)) {
+        if (dominates(elem->path.get(), other->path.get())) {
             /* Remove other. */
             elems.erase(it++);
             list_erase(other);
-        } else if (dominates(other->path, elem->path)) {
+        } else if (dominates(other->path.get(), elem->path.get())) {
             /* Remove elem. Break from loop, since we only insert a single new
              * element, domination is transitive, and within the original
              * queue no paths dominate each other within a node set. */
@@ -99,7 +99,7 @@ empty() const
 
 LinkedQueue::elem_t *
 LinkedQueue::
-list_insert(Path *path)
+list_insert(PathPtr path)
 {
     elem_t *elem = new elem_t;
     elem->path = path;

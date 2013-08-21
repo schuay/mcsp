@@ -20,7 +20,7 @@ public:
      * queue.size() = n' < n, n' elements are returned and the queue is
      * cleared.
      */
-    virtual std::vector<sp::Path *> first(const size_t n) = 0;
+    virtual std::vector<sp::PathPtr> first(const size_t n) = 0;
 
     /**
      * Inserts path into the queue.
@@ -31,7 +31,7 @@ public:
      * insert() additionally removes all nodes <- ps which are dominated by
      * any other node <- ps.
      */
-    virtual void insert(sp::Path *path) = 0;
+    virtual void insert(sp::PathPtr path) = 0;
 
     virtual bool empty() const = 0;
 };

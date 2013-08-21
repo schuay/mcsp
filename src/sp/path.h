@@ -1,6 +1,7 @@
 #ifndef __PATH_H
 #define __PATH_H
 
+#include <memory>
 #include <vector>
 
 #include "graph/edge.h"
@@ -9,7 +10,8 @@ namespace sp
 {
 
 class Path;
-typedef std::vector<Path *> Paths;
+typedef std::shared_ptr<Path> PathPtr;
+typedef std::vector<PathPtr> Paths;
 
 class Path
 {

@@ -12,8 +12,6 @@ namespace sp
 class ShortestPaths
 {
 public:
-    virtual ~ShortestPaths();
-
     void print() const;
 
 public:
