@@ -3,8 +3,9 @@ include_directories(
 )
 
 add_library(parallel_2D
-    candidate.cpp
-    candidate_set.cpp
+    label_set.cpp
+    local_label_map.cpp
+    parallel_2D.cpp
 )
 
 target_link_libraries(parallel_2D
