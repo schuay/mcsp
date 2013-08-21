@@ -16,6 +16,7 @@ Graph(const std::string &name,
     g = agopen(const_cast<char *>(name.c_str()), Agdirected, NULL);
 
     agattr(g, AGRAPH, ATTR_DEGREE, const_cast<char *>(""));
+    agattr(g, AGNODE, ATTR_NODEID, const_cast<char *>(""));
     agattr(g, AGEDGE, ATTR_WEIGHT, const_cast<char *>(""));
 
     agset(g, ATTR_DEGREE, const_cast<char *>(std::to_string(degree).c_str()));

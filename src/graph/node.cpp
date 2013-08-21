@@ -48,8 +48,8 @@ Node::
 Node(Graph *graph)
     : m_graph(graph)
 {
-    /* TODO: Add a node "label" attribute. */
     n = agnode(m_graph->g, NULL, TRUE);
+    agset(n, ATTR_NODEID, const_cast<char *>(std::to_string(AGID(n)).c_str()));
     m_graph->add_node(AGID(n), this);
 }
 

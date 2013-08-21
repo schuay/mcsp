@@ -18,6 +18,7 @@ typedef std::vector<weight_t> weight_vector_t;
 
 #define ATTR_WEIGHT const_cast<char *>("label")
 #define ATTR_DEGREE const_cast<char *>("degree")
+#define ATTR_NODEID const_cast<char *>("label")
 
 class Graph
 {
