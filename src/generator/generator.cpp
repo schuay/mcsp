@@ -13,12 +13,12 @@ using namespace graph;
 
 Graph *
 Generator::
-generate_rDiGraph(const std::string &name,
-                  const size_t &n,
-                  const size_t &m,
-                  const bool &allow_parallel_edges,
-                  const std::vector<std::pair<int, int>> &weight_limits,
-                  const unsigned short seed)
+directed(const std::string &name,
+         const size_t &n,
+         const size_t &m,
+         const bool &allow_parallel_edges,
+         const std::vector<std::pair<int, int>> &weight_limits,
+         const unsigned short seed)
 {
     assert(n > 0);
     assert(m >= n - 1);
@@ -75,13 +75,13 @@ generate_rDiGraph(const std::string &name,
 
 Graph *
 Generator::
-generate_basicTestGraph(const unsigned short seed)
+basic(const unsigned short seed)
 {
     Wl wl;
     wl.push_back(std::pair<int, int>(0, 5));
     wl.push_back(std::pair<int, int>(3, 10));
     wl.push_back(std::pair<int, int>(1, 7));
-    return Generator::generate_rDiGraph("g", N, M, true, wl, seed);
+    return Generator::directed("g", N, M, true, wl, seed);
 }
 
 std::vector<int>

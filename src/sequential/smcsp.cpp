@@ -44,8 +44,8 @@ main(int argc __attribute__((unused)),
         }
     }
 
-    Graph *g = Generator::generate_rDiGraph("test graph", n, m, true,
-                                            Generator::default_weights(), s);
+    Graph *g = Generator::directed("test graph", n, m, true,
+                                   Generator::default_weights(), s);
 
     Node *node = g->get_node(t);
     assert(node);

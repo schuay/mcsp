@@ -37,8 +37,8 @@ main(int argc,
         }
     }
 
-    Graph *g = Generator::generate_rDiGraph("test graph", n, m, true,
-                                            Generator::default_weights(), s);
+    Graph *g = Generator::directed("test graph", n, m, true,
+                                   Generator::default_weights(), s);
 
     g->write(stdout);
 

@@ -11,7 +11,7 @@ main(int argc,
      char **argv)
 {
 
-    graph::Graph *g = graph::Generator::generate_basicTestGraph(SEED);
+    graph::Graph *g = graph::Generator::basic(SEED);
 
     graph::weight_vector_t w1(2, 0);
     graph::weight_vector_t w2(2, 1);
