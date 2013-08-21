@@ -35,7 +35,8 @@ Node(Graph *graph)
     : m_graph(graph)
 {
     n = agnode(m_graph->g, NULL, TRUE);
-    agset(n, ATTR_NODEID, const_cast<char *>(std::to_string(AGID(n)).c_str()));
+    m_id = AGID(n);
+    agset(n, ATTR_NODEID, const_cast<char *>(std::to_string(m_id).c_str()));
     m_graph->add_node(AGID(n), this);
 }
 
@@ -44,6 +45,7 @@ Node(Graph *graph,
      Agnode_t *n)
     : m_graph(graph), n(n)
 {
+    m_id = AGID(n);
     m_graph->add_node(AGID(n), this);
 }
 

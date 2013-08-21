@@ -27,6 +27,8 @@ private:
 private:
     Graph *m_graph;
     Agnode_t *n;
+
+    ulong m_id;
 };
 
 }
