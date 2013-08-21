@@ -1,16 +1,15 @@
+#include <assert.h>
 #include <stdio.h>
 
-#include <assert.h>
 #include "generator/generator.h"
 #include "graph/graph.h"
 
 #define SEED (42)
 
 int
-main(int argc,
-     char **argv)
+main(int argc __attribute__((unused)),
+     char **argv __attribute__((unused)))
 {
-
     graph::Graph *g = graph::Generator::basic(SEED);
 
     graph::weight_vector_t w1(2, 0);
@@ -24,8 +23,7 @@ main(int argc,
     std::vector<graph::Node *> nodes = g->nodes();
     assert(nodes.size() >= 5);
 
-
-
     delete g;
+
     return 0;
 }
