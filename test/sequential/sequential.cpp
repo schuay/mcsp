@@ -14,10 +14,33 @@ using namespace sp;
 #define EDGES (150)
 #define SEED (42)
 
-#define TESTCASE Sequential
+#define TESTCASE SequentialTest
 
 namespace
 {
+
+class TESTCASE : public ::testing::Test
+{
+protected:
+    virtual void SetUp() {
+        g = Generator::directed("g", NODES, EDGES, true,
+                                Generator::default_weights(), SEED);
+        ASSERT_NE(g, nullptr);
+
+        start = g->nodes().front();
+        ASSERT_NE(start, nullptr);
+    }
+
+    virtual void TearDown() {
+        delete sp;
+        delete g;
+    }
+
+protected:
+    Graph *g;
+    Node *start;
+    ShortestPaths *sp;
+};
 
 bool
 is_optimal_path_set(const Paths &paths)
@@ -67,64 +90,34 @@ reachable_nodes(const Node *start)
     return set;
 }
 
-TEST(TESTCASE, SanityCheck)
+TEST_F(TESTCASE, SanityCheck)
 {
-    Graph *g = Generator::directed("g", NODES, EDGES, true,
-                                   Generator::default_weights(), SEED);
-    ASSERT_NE(g, nullptr);
-
-    Node *node = g->nodes().front();
-    ASSERT_NE(node, nullptr);
-
-    Sequential seq(g, node);
-    ShortestPaths *sp = seq.shortest_paths();
-
-    delete sp;
-    delete g;
+    Sequential seq(g, start);
+    sp = seq.shortest_paths();
 }
 
-TEST(TESTCASE, ContainsOptimalPathsOnly)
+TEST_F(TESTCASE, ContainsOptimalPathsOnly)
 {
-    Graph *g = Generator::directed("g", NODES, EDGES, true,
-                                   Generator::default_weights(), SEED);
-    ASSERT_NE(g, nullptr);
-
-    Node *node = g->nodes().front();
-    ASSERT_NE(node, nullptr);
-
-    Sequential seq(g, node);
-    ShortestPaths *sp = seq.shortest_paths();
+    Sequential seq(g, start);
+    sp = seq.shortest_paths();
 
     for (const auto & node_paths_pair : sp->paths) {
         EXPECT_TRUE(is_optimal_path_set(node_paths_pair.second));
     }
-
-    delete sp;
-    delete g;
 }
 
-TEST(TESTCASE, AllReachableNodesPresent)
+TEST_F(TESTCASE, AllReachableNodesPresent)
 {
-    Graph *g = Generator::directed("g", NODES, EDGES, true,
-                                   Generator::default_weights(), SEED);
-    ASSERT_NE(g, nullptr);
+    Sequential seq(g, start);
+    sp = seq.shortest_paths();
 
-    Node *node = g->nodes().front();
-    ASSERT_NE(node, nullptr);
-
-    Sequential seq(g, node);
-    ShortestPaths *sp = seq.shortest_paths();
-
-    std::unordered_set<const Node *> reachables = reachable_nodes(node);
+    std::unordered_set<const Node *> reachables = reachable_nodes(start);
 
     for (const auto & node_paths_pair : sp->paths) {
         reachables.erase(node_paths_pair.first);
     }
 
     EXPECT_TRUE(reachables.empty());
-
-    delete sp;
-    delete g;
 }
 
 /* TODO:
