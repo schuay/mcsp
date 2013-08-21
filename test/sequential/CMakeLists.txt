@@ -6,7 +6,7 @@ include_directories(
 add_executable(sequential_tests sequential.cpp)
 target_link_libraries(sequential_tests ${GTEST_LIBRARY}
                                        ${GTEST_MAIN_LIBRARY}
-                                       pthread
+                                       ${CMAKE_THREAD_LIBS_INIT}
                                        generator
                                        graph
                                        sequential)
