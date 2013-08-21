@@ -10,7 +10,7 @@ A couple of requirements are:
 * A working compiler toolchain
 * graphviz (Graph library)
 * Doxygen (Documentation)
-* Check (Unit testing)
+* GTest (Unit testing)
 * Astyle (Code formatting)
 * Pheet (www.pheet.org)
 
