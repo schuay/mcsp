@@ -8,18 +8,10 @@
 namespace graph
 {
 
-bool operator< (const graph::Node &lhs,
-                const graph::Node &rhs);
-
-bool operator==(const graph::Node &lhs,
-                const graph::Node &rhs);
-
 class Node
 {
     friend class Edge;
     friend class Graph;
-
-
 
 public:
     ulong id() const;
