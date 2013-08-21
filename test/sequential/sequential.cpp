@@ -1,11 +1,34 @@
+#include "generator/generator.h"
 #include "gtest/gtest.h"
+#include "sequential/sequential.h"
+
+using namespace graph;
+using namespace sp;
+
+#define NODES (50)
+#define EDGES (150)
+#define SEED (42)
+#define START (1)
+
+#define TESTCASE Sequential
 
 namespace
 {
 
-TEST(FooTest, DoesXyz)
+TEST(TESTCASE, SanityCheck)
 {
-    EXPECT_TRUE(true);
+    Graph *g = Generator::directed("g", NODES, EDGES, true,
+                                   Generator::default_weights(), SEED);
+    ASSERT_NE(g, nullptr);
+
+    Node *node = g->get_node(START);
+    ASSERT_NE(node, nullptr);
+
+    Sequential seq(g, node);
+    ShortestPaths *sp = seq.shortest_paths();
+
+    delete sp;
+    delete g;
 }
 
 } /* namespace */
