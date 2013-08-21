@@ -1,5 +1,7 @@
 #include "node.h"
 
+#include <graphviz/cgraph.h>
+
 namespace graph
 {
 

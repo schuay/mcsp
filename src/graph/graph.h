@@ -1,11 +1,15 @@
 #ifndef __GRAPH_H
 #define __GRAPH_H
 
-#include <graphviz/cgraph.h>
-#include <stdio.h>
 #include <string>
 #include <unordered_map>
 #include <vector>
+
+/* Forward declarations copied from cgraph.h. */
+
+typedef struct Agraph_s Agraph_t;
+typedef struct Agnode_s Agnode_t;
+typedef struct Agedge_s Agedge_t;
 
 namespace graph
 {

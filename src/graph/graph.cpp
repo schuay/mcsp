@@ -1,6 +1,8 @@
 #include "graph.h"
 
+#include <graphviz/cgraph.h>
 #include <stdexcept>
+#include <stdio.h>
 
 #include "edge.h"
 #include "node.h"

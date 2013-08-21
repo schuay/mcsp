@@ -1,6 +1,7 @@
 #include "edge.h"
 
 #include <assert.h>
+#include <graphviz/cgraph.h>
 #include <sstream>
 
 namespace graph
