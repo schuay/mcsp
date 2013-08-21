@@ -11,11 +11,3 @@ add_library(graph
 target_link_libraries(graph
     ${LIBCGRAPH_LIBRARY}
 )
-
-add_executable(graph_test
-    graph_test.cpp
-)
-
-target_link_libraries(graph_test
-    graph
-)
