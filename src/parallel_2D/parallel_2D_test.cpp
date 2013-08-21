@@ -22,7 +22,7 @@ main(int argc,
     graph::weight_vector_t w4(i2, i2 + sizeof(i2) / sizeof(int));
     graph::weight_vector_t w5(2, 1);
 
-    std::vector<graph::Node *> nodes = g->get_nodes();
+    std::vector<graph::Node *> nodes = g->nodes();
     assert(nodes.size() >= 5);
 
     parallel_2D::candidate_t c1(*nodes[1], w1);

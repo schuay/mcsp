@@ -32,7 +32,7 @@ Graph(Agraph_t *g)
         new Node(this, n);
     }
 
-    for (auto & p : nodes) {
+    for (auto & p : m_nodes) {
         Agnode_t *n = p.second->n;
         for (Agedge_t *e = agfstout(g, n); e != nullptr; e = agnxtout(g, e)) {
             new Edge(this, e);
@@ -43,11 +43,11 @@ Graph(Agraph_t *g)
 Graph::
 ~Graph()
 {
-    for (auto & n : nodes) {
+    for (auto & n : m_nodes) {
         delete n.second;
     }
 
-    for (auto & e : edges) {
+    for (auto & e : m_edges) {
         delete e.second;
     }
 
@@ -115,7 +115,7 @@ Graph::
 get_node(const ulong id) const
 {
     try {
-        return nodes.at(id);
+        return m_nodes.at(id);
     } catch (const std::out_of_range &) {
         return nullptr;
     }
@@ -123,10 +123,10 @@ get_node(const ulong id) const
 
 std::vector<Node *>
 Graph::
-get_nodes() const
+nodes() const
 {
     std::vector<Node *> ns;
-    for (auto & p : nodes) {
+    for (auto & p : m_nodes) {
         ns.push_back(p.second);
     }
     return ns;
@@ -137,7 +137,7 @@ Graph::
 get_edge(const ulong id) const
 {
     try {
-        return edges.at(id);
+        return m_edges.at(id);
     } catch (const std::out_of_range &) {
         return nullptr;
     }
@@ -148,7 +148,7 @@ Graph::
 add_node(const ulong id,
          Node *n)
 {
-    nodes.emplace(id, n);
+    m_nodes.emplace(id, n);
 }
 
 void
@@ -156,7 +156,7 @@ Graph::
 add_edge(const ulong id,
          Edge *e)
 {
-    edges.emplace(id, e);
+    m_edges.emplace(id, e);
 }
 
 }
