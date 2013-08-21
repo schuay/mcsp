@@ -44,12 +44,8 @@ main(int argc __attribute__((unused)),
         }
     }
 
-    Generator::Wl wl;
-    wl.push_back(std::pair<int, int>(0, 10));
-    wl.push_back(std::pair<int, int>(0, 10));
-    wl.push_back(std::pair<int, int>(0, 10));
-
-    Graph *g = Generator::generate_rDiGraph("test graph", n, m, true, wl, s);
+    Graph *g = Generator::generate_rDiGraph("test graph", n, m, true,
+                                            Generator::default_weights(), s);
 
     Node *node = g->get_node(t);
     assert(node);

@@ -36,6 +36,8 @@ public:
     static Graph *generate_basicTestGraph(const unsigned short
                                           seed);        /**< seed value for rand() */
 
+    static Wl default_weights();
+
 private:
     /** generate a weight vector w with d = weight_limits.size elements and
         forall i: weight_limits[i].first <= w[i] <= weight_limits[i].second */

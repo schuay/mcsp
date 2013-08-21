@@ -37,12 +37,8 @@ main(int argc,
         }
     }
 
-    Generator::Wl wl;
-    wl.push_back(std::pair<int, int>(0, 10));
-    wl.push_back(std::pair<int, int>(0, 10));
-    wl.push_back(std::pair<int, int>(0, 10));
-
-    Graph *g = Generator::generate_rDiGraph("test graph", n, m, true, wl, s);
+    Graph *g = Generator::generate_rDiGraph("test graph", n, m, true,
+                                            Generator::default_weights(), s);
 
     g->write(stdout);
 

@@ -96,4 +96,15 @@ generate_weight_vector(const Wl &weight_limits)
     return weights;
 }
 
+Generator::Wl
+Generator::
+default_weights()
+{
+    return { std::pair<int, int>(0, 10),
+             std::pair<int, int>(0, 10),
+             std::pair<int, int>(0, 10)
+           };
+
+}
+
 
