@@ -8,7 +8,6 @@ using namespace sp;
 #define NODES (50)
 #define EDGES (150)
 #define SEED (42)
-#define START (1)
 
 #define TESTCASE Sequential
 
@@ -21,7 +20,7 @@ TEST(TESTCASE, SanityCheck)
                                    Generator::default_weights(), SEED);
     ASSERT_NE(g, nullptr);
 
-    Node *node = g->get_node(START);
+    Node *node = g->nodes().front();
     ASSERT_NE(node, nullptr);
 
     Sequential seq(g, node);
