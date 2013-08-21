@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <getopt.h>
 #include <stdio.h>
 
 #include "generator/generator.h"
@@ -7,19 +8,53 @@
 
 using namespace graph;
 
-#define SEED (42)
-#define START (1)
+static void
+usage(void)
+{
+    fprintf(stderr, "gengraph [-n <# nodes>] [-m <# edges>] [-s <seed>] [-t <start node>]\n");
+    exit(EXIT_FAILURE);
+}
 
 int
 main(int argc __attribute__((unused)),
      char **argv __attribute__((unused)))
 {
-    Graph *g = Generator::generate_basicTestGraph(SEED);
+    int n = 10;
+    int m = 15;
+    int s = 42;
+    int t = 1;
 
-    Node *n = g->get_node(START);
-    assert(n);
+    int opt;
+    while ((opt = getopt(argc, argv, "m:n:s:t:")) != -1) {
+        switch (opt) {
+        case 'm':
+            m = strtol(optarg, NULL, 10);
+            break;
+        case 'n':
+            n = strtol(optarg, NULL, 10);
+            break;
+        case 's':
+            s = strtol(optarg, NULL, 10);
+            break;
+        case 't':
+            t = strtol(optarg, NULL, 10);
+            break;
+        default:
+            usage();
+        }
+    }
 
-    Sequential seq(g, n);
+    Generator::Wl wl;
+    wl.push_back(std::pair<int, int>(0, 10));
+    wl.push_back(std::pair<int, int>(0, 10));
+    wl.push_back(std::pair<int, int>(0, 10));
+
+    Graph *g = Generator::generate_rDiGraph("test graph", n, m, true, wl, s);
+
+    Node *node = g->get_node(t);
+    assert(node);
+
+    Sequential seq(g, node);
 
     sp::ShortestPaths *sp = seq.shortest_paths();
 
