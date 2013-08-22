@@ -11,6 +11,12 @@ using namespace pareto;
 using namespace sp;
 
 #define TESTCASE SequentialTest
+#define TEST_GRAPH(nodes, edges, seed) \
+TEST_F(TESTCASE, test_##nodes##_##edges##_##seed) \
+{ \
+    init(nodes, edges, seed); \
+    test_full(start, sp); \
+}
 
 namespace
 {
@@ -123,39 +129,15 @@ test_full(const Node *start,
 TEST_F(TESTCASE, SanityCheck)
 {
     init(50, 150, 42);
-
-    Sequential seq(g, start);
-    sp = seq.shortest_paths();
 }
 
-TEST_F(TESTCASE, 50_150_42)
-{
-    init(50, 150, 42);
-    test_full(start, sp);
-}
+TEST_GRAPH(50, 150, 42)
+TEST_GRAPH(50, 500, 51)
+TEST_GRAPH(50, 1270, 33)
+TEST_GRAPH(50, 1000, 123)
+TEST_GRAPH(333, 1501, 2031)
 
-TEST_F(TESTCASE, 50_500_51)
-{
-    init(50, 500, 51);
-    test_full(start, sp);
-}
-
-TEST_F(TESTCASE, 50_1000_123)
-{
-    init(50, 1000, 123);
-    test_full(start, sp);
-}
-
-TEST_F(TESTCASE, 500_1500_1005)
-{
-    init(500, 1500, 1005);
-    test_full(start, sp);
-}
-
-/* TODO:
- * Repeat these tests for different NODES, EDGES, SEED values.
- * Add other correctness criteria.
- */
+/* TODO: Add other correctness criteria. */
 
 } /* namespace */
 
