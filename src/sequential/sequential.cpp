@@ -24,7 +24,7 @@ shortest_paths()
     while (!m_queue.empty()) {
         /* Retrieve our next optimal candidate path. */
 
-        PathPtr p = m_queue.first(1)[0];
+        PathPtr p = m_queue.first();
         const Node *head = p->head();
 
         /* We've expanded up to head. The path is therefore optimal and must
