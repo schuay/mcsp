@@ -30,14 +30,10 @@ private:
         sp::PathPtr path;
     } elem_t;
 
-    class elem_greater
+    class elem_lexic_greater
     {
     public:
-        less dominates;
-
-        bool operator()(const elem_t *lhs, const elem_t *rhs) const {
-            return dominates(rhs->path.get(), lhs->path.get());
-        }
+        bool operator()(const elem_t *lhs, const elem_t *rhs) const;
     };
 
     typedef std::unordered_map<const graph::Node *, std::unordered_set<elem_t *>>

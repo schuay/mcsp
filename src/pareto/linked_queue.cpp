@@ -2,12 +2,35 @@
 
 #include <assert.h>
 #include <queue>
+#include <vector>
 
 using namespace graph;
 using namespace sp;
 
 namespace pareto
 {
+
+bool
+LinkedQueue::elem_lexic_greater::
+operator()(const elem_t *lhs, const elem_t *rhs) const
+{
+    assert(lhs && rhs);
+
+    const std::vector<graph::weight_t> l = lhs->path->weight();
+    const std::vector<graph::weight_t> r = rhs->path->weight();
+
+    assert(l.size() == r.size());
+    const int dims = l.size();
+
+    for (int i = 0; i < dims; i++) {
+        if (l[i] == r[i]) {
+            continue;
+        }
+        return (l[i] > r[i]);
+    }
+
+    return false;
+}
 
 LinkedQueue::
 LinkedQueue()
@@ -32,7 +55,7 @@ PathPtr
 LinkedQueue::
 first()
 {
-    std::priority_queue<elem_t *, std::vector<elem_t *>, elem_greater> q;
+    std::priority_queue<elem_t *, std::vector<elem_t *>, elem_lexic_greater> q;
 
     for (elem_t *n = m_list; n != nullptr; n = n->next) {
         q.push(n);
