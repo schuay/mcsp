@@ -10,10 +10,6 @@ using namespace graph;
 using namespace pareto;
 using namespace sp;
 
-#define NODES (50)
-#define EDGES (150)
-#define SEED (42)
-
 #define TESTCASE SequentialTest
 
 namespace
@@ -22,13 +18,18 @@ namespace
 class TESTCASE : public ::testing::Test
 {
 protected:
-    virtual void SetUp() {
-        g = Generator::directed("g", NODES, EDGES, true,
-                                Generator::default_weights(), SEED);
+    virtual void init(const int nodes,
+                      const int edges,
+                      const int seed) {
+        g = Generator::directed("g", nodes, edges, true,
+                                Generator::default_weights(), seed);
         ASSERT_NE(g, nullptr);
 
         start = g->nodes().front();
         ASSERT_NE(start, nullptr);
+
+        Sequential seq(g, start);
+        sp = seq.shortest_paths();
     }
 
     virtual void TearDown() {
@@ -90,27 +91,18 @@ reachable_nodes(const Node *start)
     return set;
 }
 
-TEST_F(TESTCASE, SanityCheck)
+void
+test_optimal_paths_only(const ShortestPaths *sp)
 {
-    Sequential seq(g, start);
-    sp = seq.shortest_paths();
-}
-
-TEST_F(TESTCASE, ContainsOptimalPathsOnly)
-{
-    Sequential seq(g, start);
-    sp = seq.shortest_paths();
-
     for (const auto & node_paths_pair : sp->paths) {
         EXPECT_TRUE(is_optimal_path_set(node_paths_pair.second));
     }
 }
 
-TEST_F(TESTCASE, AllReachableNodesPresent)
+void
+test_all_reachable_nodes_present(const Node *start,
+                                 const ShortestPaths *sp)
 {
-    Sequential seq(g, start);
-    sp = seq.shortest_paths();
-
     std::unordered_set<const Node *> reachables = reachable_nodes(start);
 
     for (const auto & node_paths_pair : sp->paths) {
@@ -118,6 +110,46 @@ TEST_F(TESTCASE, AllReachableNodesPresent)
     }
 
     EXPECT_TRUE(reachables.empty());
+}
+
+void
+test_full(const Node *start,
+          const ShortestPaths *sp)
+{
+    test_optimal_paths_only(sp);
+    test_all_reachable_nodes_present(start, sp);
+}
+
+TEST_F(TESTCASE, SanityCheck)
+{
+    init(50, 150, 42);
+
+    Sequential seq(g, start);
+    sp = seq.shortest_paths();
+}
+
+TEST_F(TESTCASE, 50_150_42)
+{
+    init(50, 150, 42);
+    test_full(start, sp);
+}
+
+TEST_F(TESTCASE, 50_500_51)
+{
+    init(50, 500, 51);
+    test_full(start, sp);
+}
+
+TEST_F(TESTCASE, 50_1000_123)
+{
+    init(50, 1000, 123);
+    test_full(start, sp);
+}
+
+TEST_F(TESTCASE, 500_1500_1005)
+{
+    init(500, 1500, 1005);
+    test_full(start, sp);
 }
 
 /* TODO:
