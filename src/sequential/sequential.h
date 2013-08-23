@@ -4,7 +4,7 @@
 #include "graph/edge.h"
 #include "graph/graph.h"
 #include "pareto/less.h"
-#include "pareto/linked_queue.h"
+#include "pareto/priority_linked_queue.h"
 #include "sp/shortest_paths.h"
 
 class Sequential
@@ -21,7 +21,7 @@ private:
     const graph::Node *start;
 
     pareto::less dominates;
-    pareto::LinkedQueue m_queue;
+    pareto::PriorityLinkedQueue m_queue;
 };
 
 #endif /* __SEQUENTIAL_H */

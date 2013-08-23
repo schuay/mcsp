@@ -20,30 +20,24 @@ public:
     LinkedQueue();
     virtual ~LinkedQueue();
 
-    std::vector<sp::PathPtr> first(const size_t n);
+    std::vector<sp::PathPtr> first(const size_t n) = 0;
     void insert(sp::PathPtr path);
     bool empty() const;
 
-private:
+protected:
     typedef struct elem_t {
         struct elem_t *prev, *next;
         sp::PathPtr path;
     } elem_t;
 
-    class elem_lexic_greater
-    {
-    public:
-        bool operator()(const elem_t *lhs, const elem_t *rhs) const;
-    };
-
     typedef std::unordered_map<const graph::Node *, std::unordered_set<elem_t *>>
             node_ptrs_t;
 
-private:
+protected:
     elem_t *list_insert(sp::PathPtr path);
     void    list_erase(elem_t *elem);
 
-private:
+protected:
     node_ptrs_t m_elems_by_head;
     elem_t *m_list;
 
