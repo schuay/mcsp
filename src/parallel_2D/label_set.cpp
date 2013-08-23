@@ -1,6 +1,7 @@
+#include "label_set.h"
 
 #include <assert.h>
-#include "label_set.h"
+
 using namespace graph;
 
 namespace parallel_2D

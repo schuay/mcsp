@@ -1,15 +1,15 @@
 #ifndef __LABEL_SET_H
 #define __LABEL_SET_H
 
-#include "graph/graph.h"
 #include <set>
+
+#include "graph/graph.h"
 
 namespace parallel_2D
 {
 
 class LabelSet
 {
-
 public:
     LabelSet(const size_t dim);
 

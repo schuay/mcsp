@@ -5,7 +5,9 @@ using namespace graph;
 namespace parallel_2D
 {
 
-LocalLabelMap::LocalLabelMap(const std::vector<Node *> nodes, const Node *start, const size_t dim)
+LocalLabelMap::LocalLabelMap(const std::vector<Node *> nodes,
+                             const Node *start,
+                             const size_t dim)
 {
     for (auto & n : nodes) {
         LabelSet *set = new LabelSet(dim);
@@ -21,4 +23,5 @@ LocalLabelMap::~LocalLabelMap()
         delete it.second;
     }
 }
+
 }
