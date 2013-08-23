@@ -1,5 +1,6 @@
 #include "linked_queue.h"
 
+#include <assert.h>
 #include <queue>
 #include <vector>
 
@@ -54,6 +55,8 @@ std::vector<PathPtr>
 LinkedQueue::
 first(const size_t n)
 {
+    assert(n == 1);
+
     std::priority_queue<elem_t *, std::vector<elem_t *>, elem_lexic_greater> q;
 
     for (elem_t *n = m_list; n != nullptr; n = n->next) {
