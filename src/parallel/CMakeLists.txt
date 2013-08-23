@@ -11,6 +11,8 @@ add_library(parallel
 
 target_link_libraries(parallel
     graph
+    pareto
+    sp
 )
 
 add_executable(pmcsp

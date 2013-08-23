@@ -1,8 +1,10 @@
 #include "parallel.h"
 
+#include "pareto/naive_linked_queue.h"
 #include "pheet/pheet.h"
 
 using namespace graph;
+using namespace pareto;
 
 namespace parallel
 {
@@ -43,6 +45,9 @@ shortest_paths()
      * 5. Merging new and old labels
      * 6. Bulk update of Q
      */
+
+    /* TODO: The NaiveLinkedQueue is neither parallel nor efficient. */
+    NaiveLinkedQueue q;
 
     return nullptr;
 }
