@@ -2,7 +2,7 @@
 
 using namespace graph;
 
-namespace parallel_2D
+namespace parallel
 {
 
 LocalLabelMap::LocalLabelMap(const std::vector<Node *> nodes,

@@ -1,13 +1,13 @@
-#include "parallel_2D.h"
+#include "parallel.h"
 
 using namespace graph;
 
-namespace parallel_2D
+namespace parallel
 {
 
-Parallel_2D::
-Parallel_2D(const Graph *g,
-            const Node *start)
+Parallel::
+Parallel(const Graph *g,
+         const Node *start)
     : m_graph(g)
 {
     //init
@@ -24,8 +24,8 @@ Parallel_2D(const Graph *g,
     //sort Lc(v) lexicographically
 }
 
-Parallel_2D::
-~Parallel_2D()
+Parallel::
+~Parallel()
 {
     delete m_labels;
 }

@@ -4,7 +4,7 @@
 
 using namespace graph;
 
-namespace parallel_2D
+namespace parallel
 {
 
 LabelSet::

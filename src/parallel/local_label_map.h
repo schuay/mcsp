@@ -6,7 +6,7 @@
 #include "graph/graph.h"
 #include "label_set.h"
 
-namespace parallel_2D
+namespace parallel
 {
 
 class LocalLabelMap

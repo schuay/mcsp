@@ -5,7 +5,7 @@
 
 #include "graph/graph.h"
 
-namespace parallel_2D
+namespace parallel
 {
 
 class LabelSet

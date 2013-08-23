@@ -3,13 +3,13 @@ include_directories(
     ${PHEET_INCLUDE_DIR}
 )
 
-add_library(parallel_2D
+add_library(parallel
     label_set.cpp
     local_label_map.cpp
-    parallel_2D.cpp
+    parallel.cpp
 )
 
-target_link_libraries(parallel_2D
+target_link_libraries(parallel
     graph
 )
 
@@ -19,7 +19,7 @@ add_executable(pmcsp
 
 target_link_libraries(pmcsp
     generator
-    parallel_2D
+    parallel
     ${CMAKE_THREAD_LIBS_INIT}
     ${HWLOC_LIBRARIES}
 )
