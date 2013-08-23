@@ -11,7 +11,7 @@ using namespace graph;
 static void
 usage(void)
 {
-    fprintf(stderr, "gengraph [-n <# nodes>] [-m <# edges>] [-s <seed>] [-t <start node>]\n");
+    fprintf(stderr, "smcsp [-n <# nodes>] [-m <# edges>] [-s <seed>] [-t <start node>]\n");
     exit(EXIT_FAILURE);
 }
 
