@@ -1,6 +1,5 @@
 #include "linked_queue.h"
 
-#include <assert.h>
 #include <queue>
 #include <vector>
 
@@ -51,9 +50,9 @@ LinkedQueue::
     }
 }
 
-PathPtr
+std::vector<PathPtr>
 LinkedQueue::
-first()
+first(const size_t n)
 {
     std::priority_queue<elem_t *, std::vector<elem_t *>, elem_lexic_greater> q;
 
@@ -61,13 +60,18 @@ first()
         q.push(n);
     }
 
-    elem_t *n = q.top();
-    PathPtr p = n->path;
+    std::vector<PathPtr> ps;
+    for (size_t i = 0; i < n && !q.empty(); i++) {
+        elem_t *n = q.top();
+        q.pop();
 
-    m_elems_by_head[p->head()].erase(n);
-    list_erase(n);
+        ps.push_back(n->path);
 
-    return p;
+        m_elems_by_head[n->path->head()].erase(n);
+        list_erase(n);
+    }
+
+    return ps;
 }
 
 void

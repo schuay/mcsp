@@ -16,9 +16,11 @@ class Queue
 {
 public:
     /**
-     * Returns the first element and removes it from the queue.
+     * Returns the first n elements and removes them from the queue.  If
+     * queue.size() = n' < n, n' elements are returned and the queue is
+     * cleared.
      */
-    virtual sp::PathPtr first() = 0;
+    virtual std::vector<sp::PathPtr> first(const size_t n) = 0;
 
     /**
      * Inserts path into the queue.

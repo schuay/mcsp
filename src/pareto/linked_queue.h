@@ -20,7 +20,7 @@ public:
     LinkedQueue();
     virtual ~LinkedQueue();
 
-    sp::PathPtr first();
+    std::vector<sp::PathPtr> first(const size_t n);
     void insert(sp::PathPtr path);
     bool empty() const;
 
