@@ -10,6 +10,9 @@ find_package(Doxygen)
 find_package(GTest)
 find_package(Threads)
 
+include(FindPkgConfig)
+pkg_search_module(HWLOC REQUIRED hwloc)
+
 find_library(LIBCGRAPH_LIBRARY cgraph)
 
 find_path(PHEET_INCLUDE_DIR pheet/pheet.h PATHS ${PHEET_PATH})
