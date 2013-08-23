@@ -5,8 +5,10 @@
 
 #include "generator/generator.h"
 #include "graph/graph.h"
+#include "parallel.h"
 
 using namespace graph;
+using namespace parallel;
 
 typedef pheet::Pheet Pheet;
 
@@ -48,6 +50,11 @@ main(int argc,
 
     Graph *g = Generator::directed("test graph", n, m, true,
                                    Generator::default_weights(), s);
+
+    Node *start = g->get_node(t);
+    assert(start);
+
+    Parallel<Pheet> p(g, start);
 
     {
         Pheet::Environment e;
