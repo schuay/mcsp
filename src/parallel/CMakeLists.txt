@@ -6,6 +6,7 @@ include_directories(
 add_library(parallel
     label_set.cpp
     local_label_map.cpp
+    locking_vector.cpp
     parallel.cpp
 )
 
