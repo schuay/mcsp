@@ -20,9 +20,9 @@ public:
     LinkedQueue();
     virtual ~LinkedQueue();
 
-    std::vector<sp::PathPtr> first(const size_t n) = 0;
-    void insert(sp::PathPtr path);
-    bool empty() const;
+    std::vector<sp::PathPtr> first(const size_t n) override = 0;
+    void insert(sp::PathPtr path) override;
+    bool empty() const override;
 
 protected:
     typedef struct elem_t {
