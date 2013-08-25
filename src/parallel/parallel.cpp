@@ -1,5 +1,8 @@
 #include "parallel.h"
 
+#include <unordered_map>
+#include <unordered_set>
+
 #include "locking_vector.h"
 #include "pareto/naive_linked_queue.h"
 #include "pheet/pheet.h"
@@ -22,6 +25,43 @@ generate_candidates(const PathPtr from,
     for (auto & e : head->out_edges()) {
         PathPtr to(from->step(e));
         candidates->locked_push_back(to);
+    }
+}
+
+void
+prune_candidates(std::vector<PathPtr> *candidates)
+{
+    less dominates;
+
+    /* CAUTION: Copy & pasted from NaiveLinkedQueue. Refactor me.
+     * Prune all dominated elements. */
+
+    for (auto i = candidates->begin(); i != candidates->end();) {
+        PathPtr lhs = *i;
+        bool broke_early = false;
+
+        /* j = i + 1 does not work :( */
+        auto j = i;
+        j++;
+        for (; j != candidates->end();) {
+            PathPtr rhs = *j;
+
+            if (dominates(lhs.get(), rhs.get())) {
+                /* Remove rhs. */
+                candidates->erase(j++);
+            } else if (dominates(rhs.get(), lhs.get())) {
+                /* Remove lhs and break from loop. */
+                candidates->erase(i++);
+                broke_early = true;
+                break;
+            } else { /* No domination in either direction. */
+                j++;
+            }
+        }
+
+        if (!broke_early) {
+            i++;
+        }
     }
 }
 
@@ -83,13 +123,38 @@ shortest_paths()
         /* TODO: How to avoid the sequential bottleneck of distributing work
          * and spawning the tasks? */
 
+        /* 2. Generating candidates. */
         {
             typename Pheet::Finish f;
             for (auto ptr : optima) {
-                /* 2. Generating candidates. */
                 Pheet::spawn(::generate_candidates, ptr, &candidates);
             }
         }
+
+        /* 3. Grouping candidates.
+         * TODO: Do this in parallel. Think about using a data structure that
+         * does this step during 2. already by using a hash map between nodes
+         * and paths. */
+        std::unordered_set<const Node *> heads;
+        std::unordered_map<const Node *, Paths> candidates_by_head;
+        for (auto ptr : candidates) {
+            const Node *head = ptr->head();
+            heads.insert(head);
+            candidates_by_head[head].push_back(ptr);
+        }
+
+        /* 4. Computing Pareto optima among candidates.
+         * TODO: A parallel algorithm that can split up a single node's path set. */
+        {
+            typename Pheet::Finish f;
+            for (auto head : heads) {
+                Pheet::spawn(::prune_candidates, &candidates_by_head[head]);
+            }
+        }
+
+        /* 5. Merging new and old labels. */
+        /* 6. Bulk update of Q. */
+
     }
 
     return sp;
