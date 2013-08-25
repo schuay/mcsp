@@ -6,9 +6,11 @@
 #include "generator/generator.h"
 #include "graph/graph.h"
 #include "parallel.h"
+#include "sp/shortest_paths.h"
 
 using namespace graph;
 using namespace parallel;
+using namespace sp;
 
 typedef pheet::Pheet Pheet;
 
@@ -54,13 +56,12 @@ main(int argc,
     Node *start = g->get_node(t);
     assert(start);
 
+    Pheet::Environment e;
     Parallel<Pheet> p(g, start);
 
-    {
-        Pheet::Environment e;
-        /* TODO: Do stuff. */
-    }
+    ShortestPaths *sp = p.shortest_paths();
 
+    delete sp;
     delete g;
 
     return 0;

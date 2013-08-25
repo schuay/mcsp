@@ -1,10 +1,31 @@
 #include "parallel.h"
 
+#include "locking_vector.h"
 #include "pareto/naive_linked_queue.h"
 #include "pheet/pheet.h"
+#include "sp/path.h"
 
 using namespace graph;
 using namespace pareto;
+using namespace sp;
+
+/** The maximum number of optimal elements processed at once during one iteration. */
+#define NELEMS (512)
+
+namespace
+{
+void
+generate_candidates(const PathPtr from,
+                    parallel::LockingVector<PathPtr> *candidates)
+{
+    const Node *head = from->head();
+    for (auto & e : head->out_edges()) {
+        PathPtr to(from->step(e));
+        candidates->locked_push_back(to);
+    }
+}
+
+} /* namespace */
 
 namespace parallel
 {
@@ -46,10 +67,32 @@ shortest_paths()
      * 6. Bulk update of Q
      */
 
-    /* TODO: The NaiveLinkedQueue is neither parallel nor efficient. */
-    NaiveLinkedQueue q;
+    ShortestPaths *sp = new ShortestPaths;
 
-    return nullptr;
+    /* TODO: The NaiveLinkedQueue is neither parallel nor efficient. */
+    NaiveLinkedQueue m_queue;
+
+    PathPtr init(new Path(m_start));
+    m_queue.insert(init);
+
+    while (!m_queue.empty()) {
+        /* 1. Pareto queue. */
+        std::vector<PathPtr> optima = m_queue.first(NELEMS);
+        LockingVector<PathPtr> candidates;
+
+        /* TODO: How to avoid the sequential bottleneck of distributing work
+         * and spawning the tasks? */
+
+        {
+            typename Pheet::Finish f;
+            for (auto ptr : optima) {
+                /* 2. Generating candidates. */
+                Pheet::spawn(::generate_candidates, ptr, &candidates);
+            }
+        }
+    }
+
+    return sp;
 }
 
 template class Parallel < pheet::PheetEnv < pheet::BStrategyScheduler,
