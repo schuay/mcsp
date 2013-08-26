@@ -65,6 +65,16 @@ prune_candidates(Paths *candidates)
     }
 }
 
+void
+merge_candidates(const Paths *candidates,
+                 Paths *shortest)
+{
+    shortest->insert(shortest->end(),
+                     candidates->begin(),
+                     candidates->end());
+    prune_candidates(shortest);
+}
+
 } /* namespace */
 
 namespace parallel
@@ -152,7 +162,17 @@ shortest_paths()
             }
         }
 
-        /* 5. Merging new and old labels. */
+        /* 5. Merging new and old labels.
+         * This step is not explained clearly in the paper, but judging by the pseudo code
+         * it simply ensures L[v] (or in our case, sp) is a Pareto set.
+         */
+        {
+            typename Pheet::Finish f;
+            for (auto head : heads) {
+                Pheet::spawn(::merge_candidates, &sp->paths[head], &candidates_by_head[head]);
+            }
+        }
+
         /* 6. Bulk update of Q. */
 
     }
