@@ -29,7 +29,7 @@ generate_candidates(const PathPtr from,
 }
 
 void
-prune_candidates(std::vector<PathPtr> *candidates)
+prune_candidates(Paths *candidates)
 {
     less dominates;
 
