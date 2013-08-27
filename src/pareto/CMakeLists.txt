@@ -5,6 +5,8 @@ include_directories(
 add_library(pareto
     less.cpp
     linked_queue.cpp
+    locked_set.cpp
     naive_linked_queue.cpp
+    naive_set.cpp
     priority_linked_queue.cpp
 )
